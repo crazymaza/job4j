@@ -9,33 +9,33 @@ public class CalculatorTest {
 
     @Test
     public void whenAddOnePlusOneThenTwo() {
-        calculator.add(1,1);
+        calculator.add(1, 1);
         double result = calculator.getResult();
         double expected = 2;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
 
     @Test
     public void whenSubtractTwoOneThenOne() {
-        calculator.subtract(2,1);
+        calculator.subtract(2, 1);
         double result = calculator.getResult();
         double expected = 1;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
 
     @Test
     public void whenFourDivOnTwoThenTwo() {
-        calculator.div(4,2);
+        calculator.div(4, 2);
         double result = calculator.getResult();
         double expected = 2;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
 
     @Test
     public void whenTwoMultipleOnTwoThenFour() {
-        calculator.multiple(2,2);
+        calculator.multiple(2, 2);
         double result = calculator.getResult();
         double expected = 4;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
 }
