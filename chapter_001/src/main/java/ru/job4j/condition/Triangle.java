@@ -45,10 +45,7 @@ public class Triangle {
      * @return - возвращает true если можно построить треугольник.
      */
     private boolean exist(double ab, double ac, double bc) {
-        if (ab == 0 && ac == 0 || bc == 0) {
-            return false;
-        }
-        return true;
+        return (((ab + bc) > ac) && ((ab + ac) > bc) && ((ac + bc) > ab));
     }
 
     /**
