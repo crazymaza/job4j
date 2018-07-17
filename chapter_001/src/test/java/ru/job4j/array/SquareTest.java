@@ -23,4 +23,13 @@ public class SquareTest {
         int[] expected = new int[]{1, 4, 9, 16, 25};
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void whenBoundZero() {
+        int bound = 0;
+        Square square = new Square();
+        int[] result = square.calculate(bound);
+        int[] expected = new int[0];
+        assertThat(result, is(expected));
+    }
 }
