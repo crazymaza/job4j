@@ -8,15 +8,20 @@ public class BubbleSort {
      * @return - отсортированный массив.
      */
     public int[] sort(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                if (array[i] < array[j]) {
-                    int temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+        for (int i = array.length - 1; i >= 2; i--) { //После каждого прохода уменьшаем длину массива на 1.
+            boolean sorted = true; //Вводим переменную, которая будет true, если массив отсортирован.
+            for (int j = 0; j < i; j++) { //Начинаем сортировку.
+                if (array[j] > array[j + 1]) { //Если j больше следующего элемента, то
+                    int temp = array[j]; //Записываем значение j в переменную.
+                    array[j] = array[j + 1]; //Присваиваем элементу j значение слудующего элемента в массиве.
+                    array[j + 1] = temp; //Присваиваем следующему элементу массива значение из переменной.
+                    sorted = false; //Присваиваем false.
                 }
             }
+            if (sorted) { //Если больше нельзя переставить элементы, то
+                break; //завершаем метод.
+            }
         }
-        return array;
+        return array; //Возвращаем отсортированный массив.
     }
 }
