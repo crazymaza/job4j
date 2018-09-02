@@ -1,7 +1,5 @@
 package ru.job4j.benchmark;
 
-import java.util.Arrays;
-
 /**
  * Есть два отсортированных по возрастанию массива чисел.
  * Нужно проверить, что они отсортированы
@@ -19,8 +17,6 @@ public class TwoArrays {
      * @return - итоговый массив.
      */
     public int[] threeArrays(int[] arr1, int[] arr2) {
-        Arrays.sort(arr1); //Сортируем массивы в порядке возрастания
-        Arrays.sort(arr2); //Сортируем массивы в порядке возрастания
         int[] resultArray = new int[arr1.length + arr2.length]; //Создание итогового массива.
         int lenFirstArray = arr1.length; //Создание переменной, равной длине массива.
         int lenSecondArray = arr2.length; //Создание переменной, равной длине массива.
