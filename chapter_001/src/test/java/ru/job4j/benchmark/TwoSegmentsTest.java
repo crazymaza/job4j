@@ -21,4 +21,12 @@ public class TwoSegmentsTest {
         boolean result = twoSegments.beOrNot(arr1);
         assertThat(result, is(false));
     }
+
+    @Test
+    public void whenOneSegmentIsCompletelyInAnotherSegment() {
+        TwoSegments twoSegments = new TwoSegments();
+        int[] arr1 = {8, 1, 3, 7};
+        boolean result = twoSegments.beOrNot(arr1);
+        assertThat(result, is(true));
+    }
 }
