@@ -13,7 +13,9 @@ public class TwoSegments {
      */
     public boolean beOrNot(int[] arr1) {
         boolean result = false;
-        if (arr1[0] > arr1[2] && arr1[1] < arr1[3]) {
+        if (arr1[1] < arr1[2] && arr1[0] > arr1[2]
+                || arr1[1] > arr1[2] && arr1[0] > arr1[3]
+                || arr1[1] < arr1[2] && arr1[0] < arr1[3]) {
             result = true;
         }
         return result;

@@ -12,26 +12,26 @@ public class TwoArrays {
      * Сортировка происходит по методу
      * "Сортировка слиянием".
      *
-     * @param arr1 - первый массив.
-     * @param arr2 - второй массив.
+     * @param first - первый массив.
+     * @param second - второй массив.
      * @return - итоговый массив.
      */
-    public int[] threeArrays(int[] arr1, int[] arr2) {
-        int[] resultArray = new int[arr1.length + arr2.length]; //Создание итогового массива.
-        int lenFirstArray = arr1.length; //Создание переменной, равной длине массива.
-        int lenSecondArray = arr2.length; //Создание переменной, равной длине массива.
+    public int[] threeArrays(int[] first, int[] second) {
+        int[] resultArray = new int[first.length + second.length]; //Создание итогового массива.
+        int lenFirstArray = first.length; //Создание переменной, равной длине массива.
+        int lenSecondArray = second.length; //Создание переменной, равной длине массива.
         int a = 0, b = 0; //Переменные-итерации по массивам
         for (int i = 0; i < resultArray.length; i++) {
             if (b < lenSecondArray && a < lenFirstArray) { //Если a и b меньше длины соответствующих массивов, то:
-                if (arr1[a] > arr2[b]) { //Если элемент в первом массиве больше элемента во втором массиве.
-                    resultArray[i] = arr2[b++]; //Заносим элемент в итоговый массив и инкреминируем переменную b.
+                if (first[a] > second[b]) { //Если элемент в первом массиве больше элемента во втором массиве.
+                    resultArray[i] = second[b++]; //Заносим элемент в итоговый массив и инкреминируем переменную b.
                 } else {
-                    resultArray[i] = arr1[a++]; //В ином случае делаем тоже самое с элементом и переменной первого массива.
+                    resultArray[i] = first[a++]; //В ином случае делаем тоже самое с элементом и переменной первого массива.
                 }
             } else if (b < lenSecondArray) { //Если первый массив закончился, а второй еще нет.
-                resultArray[i] = arr2[b++]; //Мы прибавляем элементы из массива в итоговый.
+                resultArray[i] = second[b++]; //Мы прибавляем элементы из массива в итоговый.
             } else { //Если второй массив закончился, а первый еще нет.
-                resultArray[i] = arr1[a++]; //Мы прибавляем элементы из массива в итоговый.
+                resultArray[i] = first[a++]; //Мы прибавляем элементы из массива в итоговый.
             }
         }
         return resultArray; //Возвращаем итоговый массив.
