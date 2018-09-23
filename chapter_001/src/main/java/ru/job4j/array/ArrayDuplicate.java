@@ -11,19 +11,24 @@ public class ArrayDuplicate {
      *
      * @param array -входящий массив с дубликатами.
      * @return - массив без дубликатов.
+     * {@value} unique - Переменная, которая приравнена к длине массива.
+     * В цикле for берем первый элемент массива и начинаем сравнивать со следующего элемента.
+     * Если элементы равны, то заменяем второй элемент последним.
+     * Уменьшаем длину массива.
+     * Опять сравниваем первое число со вторым.
+     * in-- Если вдруг последнее совпадает со сравниваемым.
      */
     public String[] remove(String[] array) {
-        int unique = array.length; //Переменная, которая приравнена к длине массива.
-        for (int out = 0; out < unique; out++) { //Берем первый элемент массива.
-            for (int in = out + 1; in < unique; in++) { //Начинаем сравнивать со следующего элемента.
-                if (array[out].equals(array[in])) { //Если элементы равны, то
-                    array[in] = array[unique - 1]; //заменяем второй элемент последним.
-                    unique--; //Уменьшаем длину массива.
-                    in--; //Опять сравниваем первое число со вторым.
-                    // Если вдруг последнее совпадает со сравниваемым.
+        int unique = array.length;
+        for (int out = 0; out < unique; out++) {
+            for (int in = out + 1; in < unique; in++) {
+                if (array[out].equals(array[in])) {
+                    array[in] = array[unique - 1];
+                    unique--;
+                    in--;
                 }
             }
         }
-        return Arrays.copyOf(array, unique); //Выводим массив получившейся длины.
+        return Arrays.copyOf(array, unique);
     }
 }

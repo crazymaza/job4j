@@ -7,13 +7,13 @@ public class Factorial {
 
     /**
      * Метод, который считает факториал числа.
-     * @param n - число факториал которого нужно посчитать.
+     * @param number - число факториал которого нужно посчитать.
      * @return - итоговое значение факториала.
+     * {@value} factorial - Переменная в которую будем записывать результат.
      */
-    public int calc(int n) {
-        int factorial = 1; //Переменная в которую будем записывать результат.
-
-        for (int i = 1; i <= n; i++) {
+    public int calc(int number) {
+        int factorial = 1;
+        for (int i = 1; i <= number; i++) {
             factorial *= i;
         }
         return factorial;

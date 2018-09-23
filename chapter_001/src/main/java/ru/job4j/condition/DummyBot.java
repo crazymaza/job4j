@@ -11,12 +11,12 @@ public class DummyBot {
      * @return - фраза, которую бот говорит в ответ.
      */
     public String answer(String text) {
-        String botAnswer = "Это ставит меня в тупик. Спросите другой вопрос.";
+        String answer = "Это ставит меня в тупик. Спросите другой вопрос.";
         if ("Привет, Бот!".equals(text)) {
-            botAnswer = "Привет, умник!";
+            answer = "Привет, умник!";
         } else if ("Пока.".equals(text)) {
-            botAnswer = "До скорой встречи";
+            answer = "До скорой встречи";
         }
-        return botAnswer;
+        return answer;
     }
 }

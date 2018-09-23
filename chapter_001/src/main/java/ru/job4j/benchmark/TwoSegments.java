@@ -8,14 +8,14 @@ package ru.job4j.benchmark;
 public class TwoSegments {
     /**
      * Метод, который вычисляет пересечение отрезков.
-     * @param arr1 - массив точек отрезков. arr1[0] - a, arr1[1] - b, arr1[2] - c, arr1[3] - d.
+     * @param array - массив точек отрезков. array[0] - a, array[1] - b, array[2] - c, array[3] - d.
      * @return - ответ пересекаются или нет.
      */
-    public boolean beOrNot(int[] arr1) {
+    public boolean beOrNot(int[] array) {
         boolean result = false;
-        if (arr1[1] < arr1[2] && arr1[0] > arr1[2]
-                || arr1[1] > arr1[2] && arr1[0] > arr1[3]
-                || arr1[1] < arr1[2] && arr1[0] < arr1[3]) {
+        if (array[1] < array[2] && array[0] > array[2]
+                || array[1] > array[2] && array[0] > array[3]
+                || array[1] < array[2] && array[0] < array[3]) {
             result = true;
         }
         return result;

@@ -1,9 +1,5 @@
 package ru.job4j.condition;
 
-/**
- * Import Point class.
- */
-
 import ru.job4j.point.Point;
 
 /**
@@ -27,7 +23,7 @@ public class Triangle {
     }
 
     /**
-     * The metod computes a semiperimeter.
+     * The method computes a semiperimeter.
      * @param ab - Расстояние от а до b.
      * @param ac - Расстояние от а до c.
      * @param bc - Расстояние от b до с.
@@ -53,14 +49,14 @@ public class Triangle {
      * @return - возвращает значение площади треугольника.
      */
     public double area() {
-        double rsl = -1;
+        double result = -1;
         double ab = a.distanceTo(b);
         double ac = a.distanceTo(c);
         double bc = b.distanceTo(c);
         double p = this.point(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
-            rsl = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
+            result = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
         }
-        return rsl;
+        return result;
     }
 }

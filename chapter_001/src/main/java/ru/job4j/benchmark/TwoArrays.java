@@ -15,25 +15,37 @@ public class TwoArrays {
      * @param first - первый массив.
      * @param second - второй массив.
      * @return - итоговый массив.
+     * {@value} result - Создание итогового массива.
+     * {@value} lenFirstArray - Создание переменной, равной длине первого массива.
+     * {@value} lenSecondArray - Создание переменной, равной длине второго массива.
+     * {@value} one и {@value} two - Переменные-итерации по массивам.
+     * В цикле for мы сравниваем если one и two меньше длины соответствующих массивов, то:
+     * дальше идет сравнение элементов. Если элемент в первом массиве больше элемента во втором массиве.
+     * Заносим элемент в итоговый массив и инкреминируем переменную two.
+     * В ином случае делаем тоже самое с элементом и переменной первого массива.
+     * Затем смотрим если первый массив закончился, а второй еще нет.
+     * Мы прибавляем элементы из массива в итоговый.
+     * И если второй массив закончился, а первый еще нет.
+     * Мы прибавляем элементы из массива в итоговый.
      */
     public int[] threeArrays(int[] first, int[] second) {
-        int[] resultArray = new int[first.length + second.length]; //Создание итогового массива.
-        int lenFirstArray = first.length; //Создание переменной, равной длине массива.
-        int lenSecondArray = second.length; //Создание переменной, равной длине массива.
-        int a = 0, b = 0; //Переменные-итерации по массивам
-        for (int i = 0; i < resultArray.length; i++) {
-            if (b < lenSecondArray && a < lenFirstArray) { //Если a и b меньше длины соответствующих массивов, то:
-                if (first[a] > second[b]) { //Если элемент в первом массиве больше элемента во втором массиве.
-                    resultArray[i] = second[b++]; //Заносим элемент в итоговый массив и инкреминируем переменную b.
+        int[] result = new int[first.length + second.length];
+        int lenFirstArray = first.length;
+        int lenSecondArray = second.length;
+        int one = 0, two = 0;
+        for (int i = 0; i < result.length; i++) {
+            if (two < lenSecondArray && one < lenFirstArray) {
+                if (first[one] > second[two]) {
+                    result[i] = second[two++];
                 } else {
-                    resultArray[i] = first[a++]; //В ином случае делаем тоже самое с элементом и переменной первого массива.
+                    result[i] = first[one++];
                 }
-            } else if (b < lenSecondArray) { //Если первый массив закончился, а второй еще нет.
-                resultArray[i] = second[b++]; //Мы прибавляем элементы из массива в итоговый.
-            } else { //Если второй массив закончился, а первый еще нет.
-                resultArray[i] = first[a++]; //Мы прибавляем элементы из массива в итоговый.
+            } else if (two < lenSecondArray) {
+                result[i] = second[two++];
+            } else {
+                result[i] = first[one++];
             }
         }
-        return resultArray; //Возвращаем итоговый массив.
+        return result;
     }
 }
