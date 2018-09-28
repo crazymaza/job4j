@@ -43,6 +43,7 @@ public class Tracker {
         for (int index = 0; index != items.length; index++) {
             if (items[index] != null && items[index].getName().equals(key)) {
                 result[index] = items[index];
+                break;
             }
         }
         return result;
