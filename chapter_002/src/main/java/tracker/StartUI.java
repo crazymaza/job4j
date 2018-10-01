@@ -1,0 +1,117 @@
+package tracker;
+
+public class StartUI {
+/*    добавление заявок - public Item add(Item item);
+    редактирование заявок - public void replace(String id, Item item);
+    удаление заявок - public void delete(String id);
+    получение списка всех заявок - public Item[] findAll();
+    получение списка по имени - public Item[] findByName(String key);
+    получение заявки по id - public Item findById(String id);*/
+
+    private static final String ADD = "1";
+    private static final String REPLACE = "2";
+    private static final String DELETE = "3";
+    private static final String ALL = "4";
+    private static final String BY_NAME = "5";
+    private static final String BY_ID = "6";
+    private static final String EXIT = "0";
+    private final ConsoleInput input;
+    private final Tracker tracker;
+
+    public StartUI(ConsoleInput input, Tracker tracker) {
+        this.input = input;
+        this.tracker = tracker;
+    }
+
+    /**
+     * Основной цикл программы.
+     */
+    public void init() {
+        boolean exit = false;
+        while (!exit) {
+            this.showMenu();
+            String answer = this.input.ask("Введите пункт меню : ");
+            if (ADD.equals(answer)) {
+                //добавление заявки вынесено в отдельный метод.
+                this.createItem();
+            } else if (REPLACE.equals(answer)) {
+                this.replaceItem();
+            } else if (DELETE.equals(answer)) {
+                this.deleteItem();
+            } else if (ALL.equals(answer)) {
+                this.getAllItems();
+            } else if (BY_NAME.equals(answer)) {
+                this.searchByName();
+            } else if (BY_ID.equals(answer)) {
+                this.searchById();
+            } else if (EXIT.equals(answer)) {
+                System.out.println("До скорой встречи!");
+                exit = true;
+            }
+        }
+    }
+
+    /**
+     * Отображение меню.
+     */
+    private void showMenu() {
+        System.out.println("Меню:");
+        System.out.println("1. Добавление заявки");
+        System.out.println("2. Редактирование заявки");
+        System.out.println("3. Удаление заявки");
+        System.out.println("4. Получение списка всех заявок");
+        System.out.println("5. Нахождение заявки по имени");
+        System.out.println("6. Нахождение заявки по идентификатору(id)");
+        System.out.println("0. Выход");
+    }
+
+    /**
+     * Реализация пунктов меню.
+     */
+    private void createItem() {
+        System.out.println("------------ Добавление новой заявки --------------");
+        String name = this.input.ask("Введите имя заявки :");
+        String desc = this.input.ask("Введите описание заявки :");
+        Item item = new Item(name, desc);
+        this.tracker.add(item);
+        System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
+    }
+
+    private void replaceItem() {
+        System.out.println("------------ Редактирование заявки --------------");
+        String id = this.input.ask("Введите идентификатор заявки :");
+        String name = this.input.ask("Введите имя заявки :");
+        String desc = this.input.ask("Введите описание заявки :");
+        Item item = new Item(name, desc);
+        this.tracker.replace(id, item);
+        System.out.println("------------ Заявка отредактированна Id : " + item.getId() + "-----------");
+    }
+
+    private void deleteItem() {
+
+    }
+
+    private void getAllItems() {
+
+    }
+
+    private void searchByName() {
+
+    }
+
+    private void searchById() {
+
+    }
+
+
+    /**
+     * Метод для запуска программы.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        new StartUI(new ConsoleInput(), new Tracker()).init();
+    }
+
+
+}
