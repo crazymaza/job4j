@@ -20,9 +20,17 @@ public class TrackerTest {
         Item previous = new Item("test1", "testDesc", 123L);
         tracker.add(previous);
         Item next = new Item("test2", "descTwo", 1234L);
-        next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+
+        assertThat(tracker.findById(previous.getId()), is(next));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void whenEditingItemWhichIsNot() {
+        Tracker tracker = new Tracker();
+        Item previous = new Item("test1", "testDesc", 123L);
+        Item next = new Item("test2", "descTwo", 1234L);
+        tracker.replace(previous.getId(), next);
     }
 
     @Test
@@ -35,7 +43,10 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
         tracker.delete(deleted.getId());
-        assertThat(tracker.getAll()[0], is(itemTwo));
+        Item[] expected = new Item[2];
+        expected[0] = itemTwo;
+        expected[1] = itemThree;
+        assertThat(tracker.getAll(), is(expected));
     }
 
     @Test

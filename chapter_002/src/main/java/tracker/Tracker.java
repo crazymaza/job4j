@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -37,10 +38,13 @@ public class Tracker {
      * @param item - новая заявка.
      */
     public void replace(String id, Item item) {
+        item.setId(id);
         for (int index = 0; index != items.length; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
                 break;
+            } else {
+                System.out.println("Изменяемый элемент не найден.");
             }
         }
     }
@@ -56,44 +60,37 @@ public class Tracker {
                 System.arraycopy(this.items, index + 1, this.items, index, position--);
                 break;
             }
+            position--;
         }
     }
 
     /**
      * В данном методе мы получаем массив существующих заявок.
-     *
+     * <p>
      * Цикл for можно заменить методом System.arrayCopy();
+     *
      * @return - массив существующих заявок.
      */
     public Item[] getAll() {
-        Item[] result = new Item[position];
-        for (int index = 0; index < position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
      * Метод в котором ищем заявки по имени.
      *
-     * @param key - имя заявки.
+     * @param name - имя заявки.
      * @return - массив найденых заявок.
      */
-    public Item[] findByName(String key) {
+    public Item[] findByName(String name) {
         int count = 0;
-        for (int index = 0; index != items.length; index++) {
-            if (items[index] != null && items[index].getName().equals(key)) {
+        Item[] resultArray = new Item[position];
+        for (int index = 0; index != position; index++) {
+            if (items[index] != null && items[index].getName().equals(name)) {
+                resultArray[count] = items[index];
                 count++;
             }
         }
-        Item[] resultArray = new Item[count];
-        int unique = 0;
-        for (int index = 0; index != position; index++) {
-            if (items[index] != null && items[index].getName().equals(key)) {
-                resultArray[unique++] = items[index];
-            }
-        }
-        return resultArray;
+        return Arrays.copyOf(resultArray, count);
     }
 
     /**
