@@ -45,7 +45,7 @@ public class StartUI {
             } else if (BY_ID.equals(answer)) {
                 this.searchById();
             } else if (EXIT.equals(answer)) {
-                System.out.println("До скорой встречи!");
+                System.out.println("Уже уходите? Ну что ж, до скорой встречи!");
                 exit = true;
             }
         }
@@ -74,7 +74,8 @@ public class StartUI {
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.add(item);
-        System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
+        System.out.println("------------ Новая заявка с Id : " + item.getId() + " -----------");
+        System.out.println();
     }
 
     private void replaceItem() {
@@ -84,11 +85,21 @@ public class StartUI {
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.replace(id, item);
-        System.out.println("------------ Заявка отредактированна Id : " + item.getId() + "-----------");
+        System.out.println("------------ Заявка отредактированна Id : " + item.getId() + " -----------");
+        System.out.println();
     }
 
     private void deleteItem() {
-
+        System.out.println("------------ Удаление заявки --------------");
+        String id = this.input.ask("Введите идентификатор заявки :");
+        char answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?" );
+        if (answer == 'Y' || answer == 'y') {
+            this.tracker.delete(id);
+            System.out.println("------------ Заявка удалена. -----------");
+        } else {
+            System.out.println("------------ Заявка не удалена. -----------");
+            System.out.println();
+        }
     }
 
     private void getAllItems() {

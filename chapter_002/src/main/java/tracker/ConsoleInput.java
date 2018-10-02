@@ -9,4 +9,11 @@ public class ConsoleInput {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
+    public Character answer(String question) {
+        System.out.println(question);
+        System.out.println("Y | N");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next().charAt(0);
+    }
 }
