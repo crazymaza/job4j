@@ -12,7 +12,7 @@ public class ConsoleInput {
 
     public Character answer(String question) {
         System.out.println(question);
-        System.out.println("Y | N");
+        System.out.println("Если да, то нажмите Y, если нет, то любую клавишу.");
         Scanner scanner = new Scanner(System.in);
         return scanner.next().charAt(0);
     }

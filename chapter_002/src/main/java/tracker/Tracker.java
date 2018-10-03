@@ -11,6 +11,10 @@ public class Tracker {
     private int position = 0;
     private final static Random RANDOM = new Random();
 
+    public int getPosition() {
+        return position;
+    }
+
     /**
      * Метод, который добалвяет элемент в массив.
      *
@@ -43,8 +47,6 @@ public class Tracker {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
                 break;
-            } else {
-                System.out.println("Изменяемый элемент не найден.");
             }
         }
     }
@@ -66,8 +68,6 @@ public class Tracker {
 
     /**
      * В данном методе мы получаем массив существующих заявок.
-     * <p>
-     * Цикл for можно заменить методом System.arrayCopy();
      *
      * @return - массив существующих заявок.
      */

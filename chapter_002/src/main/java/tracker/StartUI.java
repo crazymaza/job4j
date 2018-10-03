@@ -60,7 +60,7 @@ public class StartUI {
         System.out.println("2. Редактирование заявки");
         System.out.println("3. Удаление заявки");
         System.out.println("4. Получение списка всех заявок");
-        System.out.println("5. Нахождение заявки по имени");
+        System.out.println("5. Нахождение заявки по названию");
         System.out.println("6. Нахождение заявки по идентификатору(id)");
         System.out.println("0. Выход");
     }
@@ -70,7 +70,7 @@ public class StartUI {
      */
     private void createItem() {
         System.out.println("------------ Добавление новой заявки --------------");
-        String name = this.input.ask("Введите имя заявки :");
+        String name = this.input.ask("Введите название заявки :");
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.add(item);
@@ -80,38 +80,62 @@ public class StartUI {
 
     private void replaceItem() {
         System.out.println("------------ Редактирование заявки --------------");
-        String id = this.input.ask("Введите идентификатор заявки :");
-        String name = this.input.ask("Введите имя заявки :");
+        String id = this.input.ask("Введите идентификатор заявки(id) :");
+        String name = this.input.ask("Введите название заявки :");
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         this.tracker.replace(id, item);
-        System.out.println("------------ Заявка отредактированна Id : " + item.getId() + " -----------");
+        System.out.println("------------ Заявка с Id : " + item.getId() + " отредактированна -----------");
         System.out.println();
     }
 
     private void deleteItem() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите идентификатор заявки :");
-        char answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?" );
-        if (answer == 'Y' || answer == 'y') {
+        char answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?");
+        if (answer == 'Y' || answer == 'y' || answer == 'у' || answer == 'У') {
             this.tracker.delete(id);
-            System.out.println("------------ Заявка удалена. -----------");
+            System.out.println("------------ Заявка с id " + id + " удалена. -----------");
         } else {
-            System.out.println("------------ Заявка не удалена. -----------");
-            System.out.println();
+            System.out.println("------------ Заявка с id " + id + " не удалена. -----------");
         }
+        System.out.println();
     }
 
     private void getAllItems() {
-
+        System.out.println("------------ Все имеющиеся заявки --------------");
+        Item[] items = tracker.getAll();
+        for (Item item : items) {
+            System.out.printf("Id заявки: %s\n", item.getId());
+            System.out.printf("Название заявки: %s\n", item.getName());
+            System.out.printf("Описание заявки: %s\n", item.getDescription());
+            System.out.println("-------------");
+        }
+        System.out.println();
     }
 
     private void searchByName() {
-
+        System.out.println("------------ Поиск заявки по названию --------------");
+        String name = this.input.ask("Введите название заявки :");
+        Item[] items = tracker.findByName(name);
+        System.out.printf("Вот что удалось найти по названию %s:\n", name);
+        for (Item item : items) {
+            System.out.printf("Id заявки: %s\n", item.getId());
+            System.out.printf("Название заявки: %s\n", item.getName());
+            System.out.printf("Описание заявки: %s\n", item.getDescription());
+            System.out.println("-------------");
+        }
+        System.out.println();
     }
 
     private void searchById() {
-
+        System.out.println("------------ Поиск заявки по идентификатору(id) --------------");
+        String id = this.input.ask("Введите идентификатор(id) заявки :");
+        System.out.println("Вот что удалось найти по id: " + this.tracker.findById(id).getId());
+        System.out.printf("Id заявки: %s\n", this.tracker.findById(id).getId());
+        System.out.printf("Название заявки: %s\n", this.tracker.findById(id).getName());
+        System.out.printf("Описание заявки: %s\n", this.tracker.findById(id).getDescription());
+        System.out.println();
     }
 
 
