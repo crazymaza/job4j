@@ -16,4 +16,5 @@ public class ConsoleInput {
         Scanner scanner = new Scanner(System.in);
         return scanner.next().charAt(0);
     }
+
 }

@@ -138,7 +138,6 @@ public class StartUI {
         System.out.println();
     }
 
-
     /**
      * Метод для запуска программы.
      *
