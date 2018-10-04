@@ -5,15 +5,14 @@ import java.util.Random;
 
 /**
  * Класс в котором происходит основная логика программы добавления-удаления заявки.
+ * {value} items - массив заявок.
+ * {value} position - сколько заявок в массиве.
+ * {value} RANDOM - случайное число из диапазона, которое добавляется к id заявки.
  */
 public class Tracker {
     private Item[] items = new Item[100];
-    private int position = 0;
+    private int position;
     private final static Random RANDOM = new Random();
-
-    public int getPosition() {
-        return position;
-    }
 
     /**
      * Метод, который добалвяет элемент в массив.
@@ -40,30 +39,38 @@ public class Tracker {
      *
      * @param id   - уникальный номер заменяемой заявки.
      * @param item - новая заявка.
+     *             {value} result - если поменялось значение значит элемент был удален.
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         item.setId(id);
         for (int index = 0; index != items.length; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Метод, который удаляет элемент из массива(трекера)
      *
      * @param id - уникальный номер элемента.
+     *           {value} result - если поменялось значение значит элемент был удален.
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index != items.length; index++) {
             if (items[index].getId().equals(id)) {
                 System.arraycopy(this.items, index + 1, this.items, index, position--);
+                position--;
+                result = true;
                 break;
             }
-            position--;
         }
+        return result;
     }
 
     /**
@@ -80,14 +87,14 @@ public class Tracker {
      *
      * @param name - имя заявки.
      * @return - массив найденых заявок.
+     * {value} count - счетчик найденных элементов.
      */
     public Item[] findByName(String name) {
         int count = 0;
         Item[] resultArray = new Item[position];
         for (int index = 0; index != position; index++) {
             if (items[index] != null && items[index].getName().equals(name)) {
-                resultArray[count] = items[index];
-                count++;
+                resultArray[count++] = items[index];
             }
         }
         return Arrays.copyOf(resultArray, count);
@@ -98,6 +105,7 @@ public class Tracker {
      *
      * @param id - идентификатор элемента, который мы ищем.
      * @return - искомый элемент.
+     * {value} result - переменной присваиваем значение найденного элемента.
      */
     public Item findById(String id) {
         Item result = null;

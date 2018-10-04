@@ -1,5 +1,13 @@
 package tracker;
 
+/**
+ * Класс заявки.
+ * {value} name - название заявки.
+ * {value} id - идентификатор заявки.
+ * {value} description - описание заявки.
+ * {value} create - число когда была создана.
+ * {value} comments - комментарий к заявки.
+ */
 public class Item {
     private String name;
     private String id;
@@ -22,10 +30,6 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
@@ -38,23 +42,13 @@ public class Item {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public long getCreate() {
         return create;
-    }
-
-    public void setCreate(long create) {
-        this.create = create;
     }
 
     public String[] getComments() {
         return comments;
     }
 
-    public void setComments(String[] comments) {
-        this.comments = comments;
-    }
+
 }
