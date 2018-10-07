@@ -109,12 +109,15 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item element : items) {
+        Item[] claimArray = new Item[position];
+        System.arraycopy(items, 0, claimArray, 0, position);
+        for (Item element : claimArray) {
             if (element.getId().equals(id)) {
                 result = element;
                 break;
             }
         }
         return result;
+
     }
 }

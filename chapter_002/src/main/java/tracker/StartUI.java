@@ -149,11 +149,13 @@ public class StartUI {
                 if (answer == 'Y' || answer == 'y' || answer == 'у' || answer == 'У') {
                     boolean deleteItem = this.tracker.delete(id);
                     if (!deleteItem) {
-                        System.out.println("------------ Заявка с id " + id + " не удалена. -----------");
+                        System.out.println("------------ Заявка с id " + id + " не удалена -----------");
                     } else {
-                        System.out.println("------------ Заявка с id " + id + " удалена. -----------");
+                        System.out.println("------------ Заявка с id " + id + " удалена -----------");
                         break;
                     }
+                } else {
+                    System.out.println("----------- Заявка с id " + id + " не удалена -----------");
                 }
             }
         }
@@ -218,7 +220,7 @@ public class StartUI {
         Item[] items = tracker.getAll();
         if (items.length > 0) {
             Item searchResult = this.tracker.findById(id);
-            if (searchResult == null || !searchResult.getId().equals(id)) {
+            if (searchResult == null) {
                 System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
             } else {
                 System.out.println("Вот что удалось найти по id: " + searchResult.getId());
@@ -227,8 +229,7 @@ public class StartUI {
                 System.out.printf("Описание заявки: %s\n", searchResult.getDescription());
                 System.out.println();
             }
-        }
-        else {
+        } else {
             System.out.println("------------ Заявка с Id " + id + " не найдена ------------");
         }
 
