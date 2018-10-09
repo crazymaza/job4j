@@ -145,8 +145,8 @@ public class StartUI {
             if (!searchItem.getId().equals(id)) {
                 System.out.println("------------ Заявка с Id " + id + " не найдена ------------");
             } else {
-                char answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?");
-                if (answer == 'Y' || answer == 'y' || answer == 'у' || answer == 'У') {
+                String answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?");
+                if (answer.equals("Y") || answer.equals("y") || answer.equals("у") || answer.equals("У")) {
                     boolean deleteItem = this.tracker.delete(id);
                     if (!deleteItem) {
                         System.out.println("------------ Заявка с id " + id + " не удалена -----------");

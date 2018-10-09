@@ -28,11 +28,10 @@ public class ConsoleInput {
      * @param question - Вопрос на который пользователь будет вводить ответ в консоль.
      * @return возвращает пользовательский ответ.
      */
-    public Character answer(String question) {
+    public String answer(String question) {
         System.out.println(question);
         System.out.println("Если да, то нажмите Y, если нет, то любую клавишу.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.next().charAt(0);
+        return scanner.next();
     }
-
 }
