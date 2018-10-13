@@ -21,7 +21,6 @@ public class Item {
     }
 
 
-
     public Item(String name, String description, long create) {
         this.name = name;
         this.description = description;
@@ -52,5 +51,25 @@ public class Item {
         return comments;
     }
 
+    /**
+     * Переопределили метод toString, чтобы сделать проще код вывода заявки в классе StartUI.
+     * Данный метод будет применяться при выводе всех заявок, нахождении по id и названию.
+     * @return вывод заявки в выбранном формате.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Id заявки: ")
+                .append(this.getId())
+                .append("\n")
+                .append("Название заявки: ")
+                .append(this.getName())
+                .append("\n")
+                .append("Описание заявки: ")
+                .append(this.getDescription())
+                .append("\n")
+                .append("-------------");
+        return sb.toString();
+    }
 
 }

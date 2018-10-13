@@ -143,10 +143,7 @@ public class StartUI {
         System.out.println("------------ Все имеющиеся заявки --------------");
         Item[] items = tracker.getAll();
         for (Item item : items) {
-            System.out.printf("Id заявки: %s\n", item.getId());
-            System.out.printf("Название заявки: %s\n", item.getName());
-            System.out.printf("Описание заявки: %s\n", item.getDescription());
-            System.out.println("-------------");
+            System.out.println(item.toString());
         }
         System.out.println();
     }
@@ -162,10 +159,7 @@ public class StartUI {
         System.out.printf("Вот что удалось найти по названию %s:\n", name);
         Item[] items = tracker.findByName(name);
         for (Item item : items) {
-            System.out.printf("Id заявки: %s\n", item.getId());
-            System.out.printf("Название заявки: %s\n", item.getName());
-            System.out.printf("Описание заявки: %s\n", item.getDescription());
-            System.out.println("-------------");
+            System.out.println(item.toString());
         }
         System.out.println();
     }
@@ -182,11 +176,7 @@ public class StartUI {
         if (searchResult == null) {
             System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
         } else {
-            System.out.println("Вот что удалось найти по id: " + id);
-            System.out.printf("Id заявки: %s\n", searchResult.getId());
-            System.out.printf("Название заявки: %s\n", searchResult.getName());
-            System.out.printf("Описание заявки: %s\n", searchResult.getDescription());
-            System.out.println();
+            System.out.println(searchResult.toString());
         }
         System.out.println();
     }
