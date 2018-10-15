@@ -8,12 +8,13 @@ import static org.junit.Assert.assertThat;
 public class TriangleTest {
     @Test
     public void whenDrawTriangle() {
+        String ln = System.lineSeparator();
         Triangle triangle = new Triangle();
         assertThat(triangle.draw(),
                 is(
                         new StringBuilder()
-                                .append("  *  ").append("\n")
-                                .append(" *** ").append("\n")
+                                .append("  *  ").append(ln)
+                                .append(" *** ").append(ln)
                                 .append("*****")
                                 .toString()
                 )

@@ -42,13 +42,14 @@ public class PaintTest {
 
     @Test
     public void whenDrawSquare() {
+        String ln = System.lineSeparator();
         new Paint().draw(new Square());
         assertThat(
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("*****").append("\n")
-                                .append("*****").append("\n")
+                                .append("*****").append(ln)
+                                .append("*****").append(ln)
                                 .append("*****")
                                 .append(System.lineSeparator())
                                 .toString()
