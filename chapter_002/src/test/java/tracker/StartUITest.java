@@ -15,6 +15,15 @@ public class StartUITest {
     private ByteArrayOutputStream out = new ByteArrayOutputStream();
     private Tracker tracker = new Tracker();
     private String ln = System.lineSeparator();
+    private StringBuilder sb = new StringBuilder()
+            .append("Меню:").append(ln)
+            .append("1. Добавление заявки").append(ln)
+            .append("2. Редактирование заявки").append(ln)
+            .append("3. Удаление заявки").append(ln)
+            .append("4. Получение списка всех заявок").append(ln)
+            .append("5. Нахождение заявки по названию").append(ln)
+            .append("6. Нахождение заявки по идентификатору(id)").append(ln)
+            .append("0. Выход").append(ln);
 
 
     /**
@@ -79,14 +88,7 @@ public class StartUITest {
         assertThat(new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("------------ Поиск заявки по идентификатору(id) --------------")
                                 .append(ln)
                                 .append("Id заявки: ").append(item.getId()).append("\n")
@@ -94,14 +96,7 @@ public class StartUITest {
                                 .append("Описание заявки: ").append(item.getDescription()).append("\n")
                                 .append("-------------").append(ln)
                                 .append(ln)
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("Уже уходите? Ну что ж, до скорой встречи!").append(ln)
                                 .toString()
                 )
@@ -109,7 +104,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenUserCheckGetAll() {
+    public void whenTheUserChoseToViewAllApplications() {
         Item item = new Item("aaa", "aaa");
         tracker.add(item);
         ConsoleInput input = new StubInput(new String[]{"4", "0"});
@@ -117,28 +112,14 @@ public class StartUITest {
         assertThat(new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("------------ Все имеющиеся заявки --------------").append(ln)
                                 .append("Id заявки: ").append(item.getId()).append("\n")
                                 .append("Название заявки: ").append(item.getName()).append("\n")
                                 .append("Описание заявки: ").append(item.getDescription()).append("\n")
                                 .append("-------------").append(ln)
                                 .append(ln)
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("Уже уходите? Ну что ж, до скорой встречи!").append(ln)
                                 .toString()
                 )
@@ -155,14 +136,7 @@ public class StartUITest {
         assertThat(new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("------------ Поиск заявки по названию --------------").append(ln)
                                 .append("Вот что удалось найти по названию ").append(item.getName())
                                 .append(":").append("\n")
@@ -171,14 +145,7 @@ public class StartUITest {
                                 .append("Описание заявки: ").append(item.getDescription()).append("\n")
                                 .append("-------------").append(ln)
                                 .append(ln)
-                                .append("Меню:").append(ln)
-                                .append("1. Добавление заявки").append(ln)
-                                .append("2. Редактирование заявки").append(ln)
-                                .append("3. Удаление заявки").append(ln)
-                                .append("4. Получение списка всех заявок").append(ln)
-                                .append("5. Нахождение заявки по названию").append(ln)
-                                .append("6. Нахождение заявки по идентификатору(id)").append(ln)
-                                .append("0. Выход").append(ln)
+                                .append(sb)
                                 .append("Уже уходите? Ну что ж, до скорой встречи!").append(ln)
                                 .toString()
                 )
