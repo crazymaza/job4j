@@ -156,7 +156,7 @@ public class StartUI {
     private void searchByName() {
         System.out.println("------------ Поиск заявки по названию --------------");
         String name = this.input.ask("Введите название заявки :");
-        System.out.printf("Вот что удалось найти по названию %s:\n", name);
+        System.out.println("Вот что удалось найти по названию " + name + ":");
         Item[] items = tracker.findByName(name);
         for (Item item : items) {
             System.out.println(item.toString());
