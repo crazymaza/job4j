@@ -1,5 +1,8 @@
 package tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Класс в котором мы запускаем программу и
  * в котором происходит вызов всех методов программы.
@@ -15,13 +18,13 @@ package tracker;
  * {value} tracker - константа, экземпляр класса Tracker. Отвечает за запуск методов из класса Tracker.
  */
 public class StartUI {
-    private static final String ADD = "1";
-    private static final String REPLACE = "2";
-    private static final String DELETE = "3";
-    private static final String ALL = "4";
-    private static final String BY_NAME = "5";
-    private static final String BY_ID = "6";
-    private static final String EXIT = "0";
+    static final String ADD = "1";
+    static final String REPLACE = "2";
+    static final String DELETE = "3";
+    static final String ALL = "4";
+    static final String BY_NAME = "5";
+    static final String BY_ID = "6";
+    static final String EXIT = "0";
     private final ConsoleInput input;
     private final Tracker tracker;
 
@@ -44,41 +47,16 @@ public class StartUI {
      * как пользователь выберет выход из программы.
      */
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (REPLACE.equals(answer)) {
-                this.replaceItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (ALL.equals(answer)) {
-                this.getAllItems();
-            } else if (BY_NAME.equals(answer)) {
-                this.searchByName();
-            } else if (BY_ID.equals(answer)) {
-                this.searchById();
-            } else if (EXIT.equals(answer)) {
-                System.out.println("Уже уходите? Ну что ж, до скорой встречи!");
-                exit = true;
-            }
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> range = new ArrayList<>();
+        menu.fillActions();
+        for (int i = 0; i < menu.getActionsLength(); i++) {
+            range.add(i);
         }
-    }
-
-    /**
-     * Отображение меню.
-     */
-    private void showMenu() {
-        System.out.println("Меню:");
-        System.out.println("1. Добавление заявки");
-        System.out.println("2. Редактирование заявки");
-        System.out.println("3. Удаление заявки");
-        System.out.println("4. Получение списка всех заявок");
-        System.out.println("5. Нахождение заявки по названию");
-        System.out.println("6. Нахождение заявки по идентификатору(id)");
-        System.out.println("0. Выход");
+        do {
+            menu.show();
+            menu.select(input.ask("Выберите пункт меню:", range));
+        } while (!"y".equals(this.input.ask("Уходите?(y): ")));
     }
 
     /**
@@ -88,98 +66,98 @@ public class StartUI {
      * Мы получаем нужные нам данные от пользователя, создаем экземпляр класса Item
      * и затем добавляем его в наш Tracker.
      */
-    private void createItem() {
-        System.out.println("------------ Добавление новой заявки --------------");
-        String name = this.input.ask("Введите название заявки :");
-        String desc = this.input.ask("Введите описание заявки :");
-        Item item = new Item(name, desc);
-        this.tracker.add(item);
-        System.out.println("------------ Новая заявка с Id : " + item.getId() + " добавлена -----------");
-        System.out.println();
-    }
+//    private void createItem() {
+//        System.out.println("------------ Добавление новой заявки --------------");
+//        String name = this.input.ask("Введите название заявки :");
+//        String desc = this.input.ask("Введите описание заявки :");
+//        Item item = new Item(name, desc);
+//        this.tracker.add(item);
+//        System.out.println("------------ Новая заявка с Id : " + item.getId() + " добавлена -----------");
+//        System.out.println();
+//    }
 
     /**
      * Метод запускает редактирование заявки.
      * Мы получаем нужные нам данные от пользователя, создаем экземпляр класса Item
      * и затем заменяем им уже имеющуюся заявку.
      */
-    private void replaceItem() {
-        System.out.println("------------ Редактирование заявки --------------");
-        String id = this.input.ask("Введите идентификатор заявки(id) :");
-        String name = this.input.ask("Введите название заявки :");
-        String desc = this.input.ask("Введите описание заявки :");
-        Item item = new Item(name, desc);
-        if (!tracker.replace(id, item)) {
-            System.out.println("Заявка с Id " + id + " не отредактированна.");
-        } else {
-            System.out.println("------------ Заявка с Id " + id + " отредактированна -----------");
-        }
-        System.out.println();
-    }
+//    private void replaceItem() {
+//        System.out.println("------------ Редактирование заявки --------------");
+//        String id = this.input.ask("Введите идентификатор заявки(id) :");
+//        String name = this.input.ask("Введите название заявки :");
+//        String desc = this.input.ask("Введите описание заявки :");
+//        Item item = new Item(name, desc);
+//        if (!tracker.replace(id, item)) {
+//            System.out.println("Заявка с Id " + id + " не отредактированна.");
+//        } else {
+//            System.out.println("------------ Заявка с Id " + id + " отредактированна -----------");
+//        }
+//        System.out.println();
+//    }
 
     /**
      * Метод запускает удаление заявки.
      * Мы получаем нужные нам данные от пользователя,
      * находим заявку и удаляем её из Tracker'a.
      */
-    private void deleteItem() {
-        System.out.println("------------ Удаление заявки --------------");
-        String id = this.input.ask("Введите идентификатор заявки :");
-        String answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?");
-        if (answer.equals("Y") || answer.equals("y") || answer.equals("у") || answer.equals("У")) {
-            tracker.delete(id);
-            System.out.println("------------ Заявка с id " + id + " удалена -----------");
-        } else {
-            System.out.println("------------ Заявка с id " + id + " не удалена -----------");
-        }
-        System.out.println();
-    }
+//    private void deleteItem() {
+//        System.out.println("------------ Удаление заявки --------------");
+//        String id = this.input.ask("Введите идентификатор заявки :");
+//        String answer = this.input.answer("Вы точно хотите удалить заявку с id " + id + " ?");
+//        if (answer.equals("Y") || answer.equals("y") || answer.equals("у") || answer.equals("У")) {
+//            tracker.delete(id);
+//            System.out.println("------------ Заявка с id " + id + " удалена -----------");
+//        } else {
+//            System.out.println("------------ Заявка с id " + id + " не удалена -----------");
+//        }
+//        System.out.println();
+//    }
 
     /**
      * Метод отвечает за показ всех заявок, котрые имеются в базе Tracker'a.
      * Показываются заявки по единому образцу.
      */
-    private void getAllItems() {
-        System.out.println("------------ Все имеющиеся заявки --------------");
-        Item[] items = tracker.getAll();
-        for (Item item : items) {
-            System.out.println(item.toString());
-        }
-        System.out.println();
-    }
+//    private void getAllItems() {
+//        System.out.println("------------ Все имеющиеся заявки --------------");
+//        Item[] items = tracker.getAll();
+//        for (Item item : items) {
+//            System.out.println(item.toString());
+//        }
+//        System.out.println();
+//    }
 
     /**
      * Метод отвечает за нахождение заявки по названию.
      * Получаем от пользователя необходимые данные, находим по ним все заявки
      * и выводим их в консоль по единому образцу.
      */
-    private void searchByName() {
-        System.out.println("------------ Поиск заявки по названию --------------");
-        String name = this.input.ask("Введите название заявки :");
-        System.out.println("Вот что удалось найти по названию " + name + ":");
-        Item[] items = tracker.findByName(name);
-        for (Item item : items) {
-            System.out.println(item.toString());
-        }
-        System.out.println();
-    }
+//    private void searchByName() {
+//        System.out.println("------------ Поиск заявки по названию --------------");
+//        String name = this.input.ask("Введите название заявки :");
+//        System.out.println("Вот что удалось найти по названию " + name + ":");
+//        Item[] items = tracker.findByName(name);
+//        for (Item item : items) {
+//            System.out.println(item.toString());
+//        }
+//        System.out.println();
+//    }
 
     /**
      * Метод отвечает за нахождение заявки по названию.
      * Получаем от пользователя необходимые данные, находим по ним заявку
      * и выводим ее в консоль по образцу.
      */
-    private void searchById() {
-        System.out.println("------------ Поиск заявки по идентификатору(id) --------------");
-        String id = this.input.ask("Введите идентификатор(id) заявки :");
-        Item searchResult = this.tracker.findById(id);
-        if (searchResult == null) {
-            System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
-        } else {
-            System.out.println(searchResult.toString());
-        }
-        System.out.println();
-    }
+//    private void searchById() {
+//        System.out.println("------------ Поиск заявки по идентификатору(id) --------------");
+//        String id = this.input.ask("Введите идентификатор(id) заявки :");
+//        Item searchResult = this.tracker.findById(id);
+//        if (searchResult == null) {
+//            System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
+//        } else {
+//            System.out.println(searchResult.toString());
+//        }
+//        System.out.println();
+//    }
 
     /**
      * ================= Метод для запуска программы. =================

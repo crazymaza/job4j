@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,6 +20,12 @@ public class ConsoleInput {
         System.out.println(question);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public int ask(String question, List<Integer> range) {
+        System.out.println(question);
+        Scanner scanner = new Scanner(System.in);
+        return Integer.valueOf(scanner.nextLine());
     }
 
     /**
