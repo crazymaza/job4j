@@ -77,7 +77,7 @@ public class MenuTracker {
      * <p>
      * Выход из программы.
      */
-    private class ExitProgram implements UserAction {
+    public class ExitProgram implements UserAction {
         private int numberOfMenu;
         private String name;
 
@@ -92,8 +92,7 @@ public class MenuTracker {
         }
 
         public String reallyExit() {
-            String ask = input.ask("Уже уходите?");
-            return ask;
+            return input.ask("Вы нас покидаете?");
         }
 
         @Override
@@ -321,46 +320,46 @@ public class MenuTracker {
             return sb.toString();
         }
     }
+}
 
-    /**
-     * Метод отвечает за нахождение заявки по названию.
-     * Получаем от пользователя необходимые данные, находим по ним заявку
-     * и выводим ее в консоль по образцу.
-     */
-    private class FindItemById implements UserAction {
-        private int numberOfMenu;
-        private String name;
+/**
+ * Метод отвечает за нахождение заявки по названию.
+ * Получаем от пользователя необходимые данные, находим по ним заявку
+ * и выводим ее в консоль по образцу.
+ */
+class FindItemById implements UserAction {
+    private int numberOfMenu;
+    private String name;
 
-        public FindItemById(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
+    public FindItemById(int numberOfMenu, String name) {
+        this.numberOfMenu = numberOfMenu;
+        this.name = name;
+    }
+
+    @Override
+    public int key() {
+        return Integer.parseInt(BY_ID);
+    }
+
+    @Override
+    public void execute(ConsoleInput input, Tracker tracker) {
+        System.out.println("------------ Поиск заявки по идентификатору(id) --------------");
+        String id = input.ask("Введите идентификатор(id) заявки :");
+        Item searchResult = tracker.findById(id);
+        if (searchResult == null) {
+            System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
+        } else {
+            System.out.println(searchResult.toString());
         }
+        System.out.println();
+    }
 
-        @Override
-        public int key() {
-            return Integer.parseInt(BY_ID);
-        }
-
-        @Override
-        public void execute(ConsoleInput input, Tracker tracker) {
-            System.out.println("------------ Поиск заявки по идентификатору(id) --------------");
-            String id = input.ask("Введите идентификатор(id) заявки :");
-            Item searchResult = tracker.findById(id);
-            if (searchResult == null) {
-                System.out.println("------------ Заявка с Id " + id + " не найдена -----------");
-            } else {
-                System.out.println(searchResult.toString());
-            }
-            System.out.println();
-        }
-
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
+    @Override
+    public String info() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(numberOfMenu).append(". ")
+                .append(name);
+        return sb.toString();
     }
 }
 
