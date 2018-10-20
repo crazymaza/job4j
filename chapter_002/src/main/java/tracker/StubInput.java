@@ -1,6 +1,8 @@
 package tracker;
 
-public class StubInput extends ConsoleInput {
+import java.util.List;
+
+public class StubInput implements Input {
     /**
      * Это поле содержит последовательность ответов пользователя.
      * Например. Если пользователь
@@ -34,13 +36,10 @@ public class StubInput extends ConsoleInput {
         return this.value[this.position++];
     }
 
-    /**
-     * Аналогично методу ask.
-     * @param question - Вопрос на который пользователь будет вводить ответ в консоль.
-     * @return - массив значений = действия пользователя.
-     */
-    public String answer(String question) {
-        return this.value[this.position++];
+    @Override
+    public int ask(String question, List<Integer> range) {
+        return Integer.valueOf(this.value[this.position++]);
     }
+
 
 }
