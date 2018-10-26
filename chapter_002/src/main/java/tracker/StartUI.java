@@ -6,10 +6,12 @@ package tracker;
  * <p>
  * {value} input - константа, экземпляр класса ConsoleInput. Отвечает за пользовательский ввод.
  * {value} tracker - константа, экземпляр класса Tracker. Отвечает за запуск методов из класса Tracker.
+ * {value} exit - отвечает за выход из программы.
  */
 public class StartUI {
     private final Input input;
     private final Tracker tracker;
+    private boolean exit;
 
     /**
      * Консруктор класса
@@ -31,11 +33,15 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        menu.fillActions(this);
         do {
             menu.show();
             menu.select(input.ask("Выберите пункт меню:", menu.range));
-        } while (!"y".equals(this.input.ask("Уходите?(y): ")));
+        } while (!this.exit);
+    }
+
+    public void exitFromTheProgram() {
+        this.exit = true;
     }
 
     /**

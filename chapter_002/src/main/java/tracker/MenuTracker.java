@@ -16,6 +16,9 @@ public class MenuTracker {
      * @param хранит ссылку на массив типа UserAction.
      */
     private List<UserAction> actions = new ArrayList<>();
+    /**
+     * Коллекция колличества элементов меню.
+     */
     List<Integer> range = new ArrayList<>();
 
     /**
@@ -41,8 +44,8 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
-        this.actions.add(new ExitProgram(0, "Выход"));
+    public void fillActions(StartUI ui) {
+        this.actions.add(new ExitProgram(0, "Выход", ui));
         this.actions.add(new AddItem(1, "Добавление заявки"));
         this.actions.add(new MenuTracker.EditItem(2, "Редактирование заявки"));
         this.actions.add(new MenuTracker.DeleteItem(3, "Удаление заявки"));
@@ -82,10 +85,12 @@ public class MenuTracker {
     public class ExitProgram implements UserAction {
         private int numberOfMenu;
         private String name;
+        private StartUI ui;
 
-        public ExitProgram(int numberOfMenu, String name) {
+        public ExitProgram(int numberOfMenu, String name, StartUI ui) {
             this.numberOfMenu = numberOfMenu;
             this.name = name;
+            this.ui = ui;
         }
 
         @Override
@@ -93,13 +98,10 @@ public class MenuTracker {
             return this.numberOfMenu;
         }
 
-        public String reallyExit() {
-            return input.ask("Вы нас покидаете?");
-        }
-
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println(reallyExit());
+            System.out.println("Как жаль, что Вы нас покидаете.");
+            this.ui.exitFromTheProgram();
         }
 
         @Override
@@ -265,7 +267,7 @@ public class MenuTracker {
             System.out.println("------------ Удаление заявки --------------");
             String id = input.ask("Введите идентификатор заявки :");
             tracker.delete(id);
-            System.out.println("------------ Заявка с id " + id + " не удалена -----------");
+            System.out.println("------------ Заявка с id " + id + " удалена -----------");
             System.out.println();
         }
 

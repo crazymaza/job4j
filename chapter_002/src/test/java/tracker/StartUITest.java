@@ -53,7 +53,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"1", "test name", "desc", "y"});
+        Input input = new StubInput(new String[]{"1", "test name", "desc", "0"});
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll()[0].getName(), is("test name"));
     }
@@ -68,7 +68,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "y"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "0"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -78,7 +78,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         Item item1 = tracker.add(new Item("test1", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
+        Input input = new StubInput(new String[]{"3", item.getId(), "0"});
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll()[0], is(item1));
     }
@@ -87,7 +87,7 @@ public class StartUITest {
     public void whenFindItemById() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"6", item.getId(), "y"});
+        Input input = new StubInput(new String[]{"6", item.getId(), "0"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(
@@ -100,6 +100,8 @@ public class StartUITest {
                                 .append("Описание заявки: ").append(item.getDescription()).append(ln)
                                 .append("-------------").append(ln)
                                 .append(ln)
+                                .append(sb)
+                                .append("Как жаль, что Вы нас покидаете.").append(ln)
                                 .toString()
                 )
         );
@@ -110,7 +112,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("aaa", "aaa");
         tracker.add(item);
-        Input input = new StubInput(new String[]{"4", "y"});
+        Input input = new StubInput(new String[]{"4", "0"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(
@@ -122,6 +124,8 @@ public class StartUITest {
                                 .append("Описание заявки: ").append(item.getDescription()).append(ln)
                                 .append("-------------").append(ln)
                                 .append(ln)
+                                .append(sb)
+                                .append("Как жаль, что Вы нас покидаете.").append(ln)
                                 .toString()
                 )
 
@@ -133,7 +137,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("aaa", "aaa");
         tracker.add(item);
-        Input input = new StubInput(new String[]{"5", item.getName(), "y"});
+        Input input = new StubInput(new String[]{"5", item.getName(), "0"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(
@@ -147,6 +151,8 @@ public class StartUITest {
                                 .append("Описание заявки: ").append(item.getDescription()).append(ln)
                                 .append("-------------").append(ln)
                                 .append(ln)
+                                .append(sb)
+                                .append("Как жаль, что Вы нас покидаете.").append(ln)
                                 .toString()
                 )
         );
