@@ -25,6 +25,18 @@ public class ConsoleInput implements Input {
     public int ask(String question, List<Integer> range) {
         System.out.println(question);
         Scanner scanner = new Scanner(System.in);
-        return Integer.valueOf(scanner.nextLine());
+        int key =  Integer.valueOf(scanner.nextLine());
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Не верный пункт меню");
+        }
     }
 }
