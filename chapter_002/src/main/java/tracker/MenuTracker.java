@@ -266,8 +266,11 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Удаление заявки --------------");
             String id = input.ask("Введите идентификатор заявки :");
-            tracker.delete(id);
-            System.out.println("------------ Заявка с id " + id + " удалена -----------");
+            if(tracker.delete(id)) {
+                System.out.println("------------ Заявка с id " + id + " удалена -----------");
+            } else {
+                System.out.println("------------ Заявка с id " + id + " не найдена -----------");
+            }
             System.out.println();
         }
 
