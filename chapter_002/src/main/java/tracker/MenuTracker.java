@@ -47,12 +47,12 @@ public class MenuTracker {
     public void fillActions(StartUI ui) {
         this.actions.add(new ExitProgram(0, "Выход", ui));
         this.actions.add(new AddItem(1, "Добавление заявки"));
-        this.actions.add(new MenuTracker.EditItem(2, "Редактирование заявки"));
+        this.actions.add(new ValidateMenuItems(new MenuTracker.EditItem(2, "Редактирование заявки")));
         this.actions.add(new MenuTracker.DeleteItem(3, "Удаление заявки"));
         this.actions.add(new ShowItems(4, "Получение списка всех заявок"));
         this.actions.add(new FindItemsByName(5, "Нахождение заявки по названию"));
         this.actions.add(new FindItemById(6, "Нахождение заявки по идентификатору(id)"));
-        for (int i = 0; i < actions.size(); i++) {
+        for (int i = 0; i < this.getActionsLength(); i++) {
             range.add(i);
         }
     }
@@ -184,14 +184,19 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Редактирование заявки --------------");
             String id = input.ask("Введите идентификатор заявки(id) :");
+            long index = Long.parseLong(id);
+            if (tracker.findById(id) == null) {
+                throw new IdNotFoundException("Id not found");
+            } else if (index < 0) {
+                throw new MenuOutException("Id less then zero.");
+            } else if (!id.equals(String.valueOf(index))) {
+                throw new MenuOutException("WTF?");
+            }
             String name = input.ask("Введите название заявки :");
             String desc = input.ask("Введите описание заявки :");
             Item item = new Item(name, desc);
-            if (!tracker.replace(id, item)) {
-                System.out.println("Заявка с Id " + id + " не отредактированна.");
-            } else {
-                System.out.println("------------ Заявка с Id " + id + " отредактированна -----------");
-            }
+            tracker.replace(id, item);
+            System.out.println("------------ Заявка с Id " + id + " отредактированна -----------");
             System.out.println();
         }
 
@@ -266,7 +271,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Удаление заявки --------------");
             String id = input.ask("Введите идентификатор заявки :");
-            if(tracker.delete(id)) {
+            if (tracker.delete(id)) {
                 System.out.println("------------ Заявка с id " + id + " удалена -----------");
             } else {
                 System.out.println("------------ Заявка с id " + id + " не найдена -----------");

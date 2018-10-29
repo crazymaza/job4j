@@ -1,7 +1,6 @@
 package tracker;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ValidateInput implements Input {
     Input input;
@@ -12,9 +11,7 @@ public class ValidateInput implements Input {
 
     @Override
     public String ask(String question) {
-        System.out.println(question);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return this.input.ask(question);
     }
 
     @Override
