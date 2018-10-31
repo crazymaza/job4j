@@ -2,16 +2,11 @@ package tracker;
 
 import java.util.List;
 
-public class ValidateInput implements Input {
-    Input input;
-
-    public ValidateInput(Input input) {
-        this.input = input;
-    }
+public class ValidateInput extends ConsoleInput {
 
     @Override
     public String ask(String question) {
-        return this.input.ask(question);
+        return super.ask(question);
     }
 
     @Override
@@ -20,7 +15,7 @@ public class ValidateInput implements Input {
         boolean valid = true;
         do {
             try {
-                value = this.input.ask(question, range);
+                value = super.ask(question, range);
                 valid = false;
             } catch (MenuOutException e) {
                 System.out.println("Нет такого пункта, выберите другой.");
