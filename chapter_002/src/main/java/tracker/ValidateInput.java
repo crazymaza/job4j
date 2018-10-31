@@ -17,17 +17,17 @@ public class ValidateInput implements Input {
     @Override
     public int ask(String question, List<Integer> range) {
         int value = -1;
-        boolean invalid = true;
+        boolean valid = true;
         do {
             try {
                 value = this.input.ask(question, range);
-                invalid = false;
+                valid = false;
             } catch (MenuOutException e) {
                 System.out.println("Нет такого пункта, выберите другой.");
             } catch (NumberFormatException e) {
                 System.out.println("Нужно вводить только цифры. Повторите ввод.");
             }
-        } while (invalid);
+        } while (valid);
         return value;
     }
 }
