@@ -82,36 +82,18 @@ public class MenuTracker {
      * <p>
      * Выход из программы.
      */
-    public class ExitProgram implements UserAction {
-        private int numberOfMenu;
-        private String name;
+    public class ExitProgram extends BaseAction {
         private StartUI ui;
 
         public ExitProgram(int numberOfMenu, String name, StartUI ui) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
+            super(numberOfMenu, name);
             this.ui = ui;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("Как жаль, что Вы уже уходите.");
             this.ui.exitFromTheProgram();
-        }
-
-        @Override
-        public String info() {
-            String ln = System.lineSeparator();
-            StringBuilder sb = new StringBuilder();
-            sb.append("Меню:").append(ln)
-                    .append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
         }
     }
 
@@ -122,18 +104,9 @@ public class MenuTracker {
      * Мы получаем нужные нам данные от пользователя, создаем экземпляр класса Item
      * и затем добавляем его в наш Tracker.
      */
-    public class AddItem implements UserAction {
-        private int numberOfMenu;
-        private String name;
-
+    public class AddItem extends BaseAction {
         public AddItem(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
+            super(numberOfMenu, name);
         }
 
         @Override
@@ -146,17 +119,6 @@ public class MenuTracker {
             System.out.println("------------ Новая заявка с Id : " + item.getId() + " добавлена -----------");
             System.out.println();
         }
-
-        /**
-         * Отображение меню.
-         */
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
     }
 
     /**
@@ -166,18 +128,9 @@ public class MenuTracker {
      * Мы получаем нужные нам данные от пользователя, создаем экземпляр класса Item
      * и затем заменяем им уже имеющуюся заявку.
      */
-    private static class EditItem implements UserAction {
-        private int numberOfMenu;
-        private String name;
-
+    private static class EditItem extends BaseAction {
         public EditItem(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
+            super(numberOfMenu, name);
         }
 
         @Override
@@ -196,14 +149,6 @@ public class MenuTracker {
 
             System.out.println();
         }
-
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
     }
 
     /**
@@ -212,18 +157,9 @@ public class MenuTracker {
      * Метод отвечает за показ всех заявок, котрые имеются в базе Tracker'a.
      * Показываются заявки по единому образцу.
      */
-    private class ShowItems implements UserAction {
-        private int numberOfMenu;
-        private String name;
-
+    private class ShowItems extends BaseAction {
         public ShowItems(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
+            super(numberOfMenu, name);
         }
 
         @Override
@@ -236,13 +172,6 @@ public class MenuTracker {
             System.out.println();
         }
 
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
     }
 
     /**
@@ -250,18 +179,9 @@ public class MenuTracker {
      * Мы получаем нужные нам данные от пользователя,
      * находим заявку и удаляем её из Tracker'a.
      */
-    private static class DeleteItem implements UserAction {
-        private int numberOfMenu;
-        private String name;
-
+    private static class DeleteItem extends BaseAction {
         public DeleteItem(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
+            super(numberOfMenu, name);
         }
 
         @Override
@@ -275,14 +195,6 @@ public class MenuTracker {
             }
             System.out.println();
         }
-
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
     }
 
     /**
@@ -290,18 +202,9 @@ public class MenuTracker {
      * Получаем от пользователя необходимые данные, находим по ним все заявки
      * и выводим их в консоль по единому образцу.
      */
-    private class FindItemsByName implements UserAction {
-        private int numberOfMenu;
-        private String name;
-
+    private class FindItemsByName extends BaseAction {
         public FindItemsByName(int numberOfMenu, String name) {
-            this.numberOfMenu = numberOfMenu;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return this.numberOfMenu;
+            super(numberOfMenu, name);
         }
 
         @Override
@@ -315,14 +218,6 @@ public class MenuTracker {
             }
             System.out.println();
         }
-
-        @Override
-        public String info() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(numberOfMenu).append(". ")
-                    .append(name);
-            return sb.toString();
-        }
     }
 }
 
@@ -331,18 +226,9 @@ public class MenuTracker {
  * Получаем от пользователя необходимые данные, находим по ним заявку
  * и выводим ее в консоль по образцу.
  */
-class FindItemById implements UserAction {
-    private int numberOfMenu;
-    private String name;
-
+class FindItemById extends BaseAction {
     public FindItemById(int numberOfMenu, String name) {
-        this.numberOfMenu = numberOfMenu;
-        this.name = name;
-    }
-
-    @Override
-    public int key() {
-        return this.numberOfMenu;
+        super(numberOfMenu, name);
     }
 
     @Override
@@ -356,14 +242,6 @@ class FindItemById implements UserAction {
             System.out.println(searchResult.toString());
         }
         System.out.println();
-    }
-
-    @Override
-    public String info() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(numberOfMenu).append(". ")
-                .append(name);
-        return sb.toString();
     }
 }
 
