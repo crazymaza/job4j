@@ -30,8 +30,9 @@ public class ValidateInputTest {
     @Test
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[] {"invalid", "1"})
+                new StubInput(new String[]{"invalid", "1"})
         );
+        range.add(1);
         input.ask("Enter", range);
         assertThat(
                 this.mem.toString(),
@@ -40,5 +41,21 @@ public class ValidateInputTest {
                 )
         );
     }
+
+    @Test
+    public void whenInvalidInputTwice() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"9", "1"})
+        );
+        range.add(1);
+        input.ask("Enter", range);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Нет такого пункта, выберите другой.%n")
+                )
+        );
+    }
 }
+
 
