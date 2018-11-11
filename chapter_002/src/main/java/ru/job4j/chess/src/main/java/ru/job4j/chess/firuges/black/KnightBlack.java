@@ -9,16 +9,15 @@ import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class KnightBlack implements Figure {
-    private final Cell position;
+public class KnightBlack extends Figure {
 
     public KnightBlack(final Cell position) {
-        this.position = position;
+        super(position) ;
     }
 
     @Override
     public Cell position() {
-        return this.position;
+        return super.position();
     }
 
     @Override

@@ -9,16 +9,14 @@ import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class BishopWhite implements Figure {
-    private final Cell position;
-
+public class BishopWhite extends Figure {
     public BishopWhite(final Cell position) {
-        this.position = position;
+        super(position);
     }
 
     @Override
     public Cell position() {
-        return this.position;
+        return super.position();
     }
 
     @Override
