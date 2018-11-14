@@ -40,10 +40,10 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            for (int step = 0; step < steps.length; step++) {
-                for (int figureNum = 0; figureNum < figures.length; figureNum++) {
-                    if ((steps[step].y) == (figures[figureNum].position().y) &&
-                            (steps[step].x) == (figures[figureNum].position().x)) {
+            for (Cell step1 : steps) {
+                for (Figure figure : figures) {
+                    if ((step1.y) == (figure.position().y) &&
+                            (step1.x) == (figure.position().x)) {
                         throw new OccupiedWayException("This place is already taken");
                     }
                 }
