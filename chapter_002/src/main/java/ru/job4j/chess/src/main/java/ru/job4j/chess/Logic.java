@@ -22,12 +22,17 @@ public class Logic {
     }
 
     /**
-     * @param source
-     * @param dest
-     * @return
-     * @throws ImpossibleMoveException
-     * @throws OccupiedWayException
-     * @throws FigureNotFoundException
+     * @param source - откуда делается ход.
+     * @param dest   - куда делается ход.
+     * @return - возвращаем булево значение возможно сделать ход или нет.
+     * @throws ImpossibleMoveException - ошибка, если невозможно пойти.
+     * @throws OccupiedWayException    - ошибка, если клетка занята.
+     * @throws FigureNotFoundException - ошибка, если фигура не найдена.
+     * <p>
+     * Проходимся в цикле по массиву ячеек и по массиву фигур.
+     * Если значения ячейки куда будет сделан ход совпадает с одним из значений
+     * массива фигур, то выбрасываем исключение о занятости ячейки.
+     * В ином случае делается ход.
      */
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
             OccupiedWayException, FigureNotFoundException {
