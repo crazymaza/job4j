@@ -1,5 +1,6 @@
 package ru.job4j.chess.src.main.java.ru.job4j.chess;
 
+import javafx.scene.control.Alert;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.FigureNotFoundException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.OccupiedWayException;
@@ -22,36 +23,44 @@ public class Logic {
     }
 
     /**
+     * Проходимся в цикле по массиву ячеек и по массиву фигур.
+     * Если значения ячейки куда будет сделан ход совпадает с одним из значений
+     * массива фигур, то выбрасываем исключение о занятости ячейки.
+     * В ином случае делается ход.
+     *
      * @param source - откуда делается ход.
      * @param dest   - куда делается ход.
      * @return - возвращаем булево значение возможно сделать ход или нет.
      * @throws ImpossibleMoveException - ошибка, если невозможно пойти.
      * @throws OccupiedWayException    - ошибка, если клетка занята.
      * @throws FigureNotFoundException - ошибка, если фигура не найдена.
-     * <p>
-     * Проходимся в цикле по массиву ячеек и по массиву фигур.
-     * Если значения ячейки куда будет сделан ход совпадает с одним из значений
-     * массива фигур, то выбрасываем исключение о занятости ячейки.
-     * В ином случае делается ход.
      */
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
             OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
-        int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            for (Cell step1 : steps) {
-                for (Figure figure : figures) {
-                    if ((step1.y) == (figure.position().y) &&
-                            (step1.x) == (figure.position().x)) {
-                        throw new OccupiedWayException("This place is already taken");
+        try {
+            int index = this.findBy(source);
+            if (index != -1) {
+                Cell[] steps = this.figures[index].way(source, dest);
+                for (Cell step1 : steps) {
+                    for (Figure figure : figures) {
+                        if ((step1.y) == (figure.position().y) &&
+                                (step1.x) == (figure.position().x)) {
+                            throw new OccupiedWayException("This place is already taken");
+                        }
                     }
                 }
+                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                    rst = true;
+                    this.figures[index] = this.figures[index].copy(dest);
+                }
             }
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
+        } catch (OccupiedWayException owe) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Здесь уже занято!");
+            alert.setHeaderText(null);
+            alert.setContentText("Здесь уже занято! Выбирете другую клетку.");
+            alert.showAndWait();
         }
         return rst;
     }
