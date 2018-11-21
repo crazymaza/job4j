@@ -1,6 +1,5 @@
 package ru.job4j.chess.src.main.java.ru.job4j.chess;
 
-import javafx.scene.control.Alert;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.FigureNotFoundException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.OccupiedWayException;
@@ -38,10 +37,9 @@ public class Logic {
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
             OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
-        try {
-            int index = this.findBy(source);
-            if (index != -1) {
-                Cell[] steps = this.figures[index].way(source, dest);
+        int index = this.findBy(source);
+        if (index != -1) {
+            Cell[] steps = this.figures[index].way(source, dest);
                 for (Cell step1 : steps) {
                     for (Figure figure : figures) {
                         if ((step1.y) == (figure.position().y) &&
@@ -50,17 +48,12 @@ public class Logic {
                         }
                     }
                 }
-                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
-                }
+
+
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                rst = true;
+                this.figures[index] = this.figures[index].copy(dest);
             }
-        } catch (OccupiedWayException owe) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Здесь уже занято!");
-            alert.setHeaderText(null);
-            alert.setContentText("Здесь уже занято! Выбирете другую клетку.");
-            alert.showAndWait();
         }
         return rst;
     }

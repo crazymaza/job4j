@@ -1,6 +1,5 @@
 package ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.black;
 
-import javafx.scene.control.Alert;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Figure;
@@ -23,19 +22,11 @@ public class BishopBlack extends Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
-            Cell[] move = new Cell[Math.abs(source.x - dest.x)];
-            try {
-                do {
-                    move = moveDiagonal(source, dest);
-                } while (isDiagonal(source, dest));
-            } catch (ImpossibleMoveException ime) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ходим только по диагонали!");
-                alert.setHeaderText(null);
-                alert.setContentText("Слон ходит только по диагонали!");
-                alert.showAndWait();
-            }
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+        Cell[] move = new Cell[Math.abs(source.x - dest.x)];
+        if (!isDiagonal(source, dest)) {
+            move = moveDiagonal(source, dest);
+        }
         return move;
     }
 

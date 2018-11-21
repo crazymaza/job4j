@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.ImpossibleMoveException;
+import ru.job4j.chess.src.main.java.ru.job4j.chess.exceptions.OccupiedWayException;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.src.main.java.ru.job4j.chess.firuges.black.*;
@@ -21,6 +23,8 @@ public class Chess extends Application {
     private static final String JOB4J = "Шахматы на www.job4j.ru";
     private final int size = 8;
     private final Logic logic = new Logic();
+    private Cell source;
+    private Cell dest;
 
     private Rectangle buildRectangle(int x, int y, int size, boolean white) {
         Rectangle rect = new Rectangle();
@@ -45,6 +49,7 @@ public class Chess extends Application {
         rect.setWidth(size);
         Image img = new Image(this.getClass().getClassLoader().getResource(image).toString());
         rect.setFill(new ImagePattern(img));
+
         final Rectangle momento = new Rectangle(x, y);
         rect.setOnDragDetected(
                 event -> {
@@ -58,17 +63,24 @@ public class Chess extends Application {
                     rect.setY(event.getY() - size / 2);
                 }
         );
-        rect.setOnMouseReleased(
-                event -> {
-                    if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
-                        rect.setX(((int) event.getX() / 40) * 40 + 5);
-                        rect.setY(((int) event.getY() / 40) * 40 + 5);
-                    } else {
-                        rect.setX(((int) momento.getX() / 40) * 40 + 5);
-                        rect.setY(((int) momento.getY() / 40) * 40 + 5);
+
+            rect.setOnMouseReleased(
+                    event -> {
+                        try {
+                            if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
+                                rect.setX(((int) event.getX() / 40) * 40 + 5);
+                                rect.setY(((int) event.getY() / 40) * 40 + 5);
+                            } else {
+                                rect.setX(((int) momento.getX() / 40) * 40 + 5);
+                                rect.setY(((int) momento.getY() / 40) * 40 + 5);
+                            }
+                        } catch (ImpossibleMoveException ime) {
+                            System.out.println("Нельзя!");
+                        } catch (OccupiedWayException owe) {
+                            System.out.println("Занято!");
+                        }
                     }
-                }
-        );
+            );
         return rect;
     }
 
