@@ -40,16 +40,14 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-                for (Cell step1 : steps) {
-                    for (Figure figure : figures) {
-                        if ((step1.y) == (figure.position().y) &&
-                                (step1.x) == (figure.position().x)) {
-                            throw new OccupiedWayException("This place is already taken");
-                        }
+            for (Cell step1 : steps) {
+                for (Figure figure : figures) {
+                    if ((step1.y) == (figure.position().y) &&
+                            (step1.x) == (figure.position().x)) {
+                        throw new OccupiedWayException("This place is already taken");
                     }
                 }
-
-
+            }
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
