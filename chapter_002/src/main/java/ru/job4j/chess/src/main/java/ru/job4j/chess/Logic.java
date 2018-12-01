@@ -52,6 +52,8 @@ public class Logic {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
+        } else {
+            throw new FigureNotFoundException("Figure not found");
         }
         return rst;
     }
