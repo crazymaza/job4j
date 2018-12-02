@@ -17,19 +17,19 @@ public class LogicTest {
     public void whenMoveIsOccupied() {
         logic.add(new BishopBlack(B2));
         logic.add(new BishopBlack(C1));
-        logic.move(C1,B2);
+        logic.move(C1, B2);
     }
 
     @Test(expected = FigureNotFoundException.class)
     public void whenFigureNotFound() {
         logic.add(new BishopBlack(C1));
-        logic.move(C2,C3);
+        logic.move(C2, C3);
     }
 
     @Test
-    public void whenStepIsPossible(){
-        logic.add(new BishopBlack(C1));
-        boolean result = logic.move(C1,E3);
-        assertThat("The figure did not go.", result, is(true));
+    public void whenStepIsPossible() {
+        logic.add(new BishopBlack(F8));
+        boolean result = logic.move(F8, E7);
+        assertThat(result, is(true));
     }
 }

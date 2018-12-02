@@ -34,26 +34,21 @@ public class Logic {
      * @throws OccupiedWayException    - ошибка, если клетка занята.
      * @throws FigureNotFoundException - ошибка, если фигура не найдена.
      */
-    public boolean move(Cell source, Cell dest) throws ImpossibleMoveException,
-            OccupiedWayException, FigureNotFoundException {
+    public boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
         int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            for (Cell step1 : steps) {
-                for (Figure figure : figures) {
-                    if ((step1.y) == (figure.position().y) &&
-                            (step1.x) == (figure.position().x)) {
-                        throw new OccupiedWayException("This place is already taken");
-                    }
-                }
-            }
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
-        } else {
+        if (index == -1) {
             throw new FigureNotFoundException("Figure not found");
+        }
+        Cell[] steps = this.figures[index].way(source, dest);
+        for (Cell chess : steps) {
+            if (this.findBy(chess) != -1) {
+                throw new OccupiedWayException("This way is occupied");
+            }
+        }
+        if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            this.figures[index] = this.figures[index].copy(dest);
+            rst = true;
         }
         return rst;
     }
