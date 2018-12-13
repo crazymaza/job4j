@@ -9,7 +9,7 @@ import tracker.Tracker;
  */
 public class TrackerSingletonComp {
     private Tracker tracker = new Tracker();
-    private static TrackerSingletonComp ourInstance = new TrackerSingletonComp();
+    private static TrackerSingletonComp ourInstance;
 
     /**
      * Здесь мы получаем экземпляр класса.
