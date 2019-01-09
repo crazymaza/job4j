@@ -6,10 +6,8 @@ package coffeeMachine;
  * {value} int[] numberOfCoins - массив значений монет определенного номинала.
  * {value} int[] coins - массив всех доступных монет.
  * + После этого делаем вычисление общей суммы сдачи.
- * + Делаем деление на 10 и приводим значение к целому числу.
- * + Данное значение сохраняем в первый элемент массива numberOfCoins.
- * + Вычитаем значение колличества 10 рублёвых монет умноженное на 10
- * из значения полной сдачи.
+ * + Далее смотрим сколько у нас нужно 10 рублёвых монет и сколько ещё
+ * осталось сдачи.
  * + В цикле перебираем массив с возможными монетами и, если попадается
  * та, которая равна значению из переменной остатка сдачи,
  * записываем значение 1 в массив numberOfCoins, т.к. нужна 1 монета данного номинала.
@@ -32,29 +30,33 @@ public class CoffeeMachine {
      * @param value - колличество денег, которые внесли для покупки кофе.
      * @param price - цена кофе
      * @return - массив монет сдачи.
-     * {value} allChange - общее значение сдачи.
-     * {value} anotherChange - оставшееся значение сдачи, после вычитания колличества 10 рублёвых монет
-     * нужного номинала в {value} anotherChange.
+     * {value} allChange - общее значение сдачи, в ходе работы кода
+     * значение меняется на оставшееся значение сдачи.
      */
     public int[] changes(int value, int price) {
         if (value < price) {
             System.out.println("Put more money!");
         }
         int allChange = value - price;
-        numberOfCoins[0] = allChange / 10;
-        int anotherChange = allChange - 10 * numberOfCoins[0];
+        while (allChange > 10) {
+            allChange -= 10;
+            numberOfCoins[0]++;
+        }
         for (int index = 1; index < coins.length; index++) {
-            if (anotherChange == coins[index]) {
+            if (allChange == coins[index]) {
                 numberOfCoins[index]++;
                 break;
             }
-            if (anotherChange > coins[index]) {
-                numberOfCoins[index] = anotherChange / coins[index];
-                anotherChange -= coins[index];
+            if (allChange > coins[index]) {
+                numberOfCoins[index] = allChange / coins[index];
+                allChange -= coins[index];
             }
         }
-        int[] amountOfChange = new int[numberOfCoins[0] +
-                numberOfCoins[1] + numberOfCoins[2] + numberOfCoins[3]];
+        int sumOfAllCoins = 0;
+        for (int numberOfCoin : numberOfCoins) {
+            sumOfAllCoins += numberOfCoin;
+        }
+        int[] amountOfChange = new int[sumOfAllCoins];
         for (int index1 = 0; index1 != amountOfChange.length; index1++) {
             for (int i = 0; i != numberOfCoins.length; i++) {
                 if (numberOfCoins[i] != 0) {
