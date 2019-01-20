@@ -1,4 +1,4 @@
-package search;
+package search.arrayList;
 
 public class Person {
     private String name;
