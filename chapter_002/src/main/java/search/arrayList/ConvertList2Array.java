@@ -35,18 +35,13 @@ public class ConvertList2Array {
         return array;
     }
 
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> integerList = new ArrayList<>();
-        int index = 0;
-        for (int r : integerList) {
-            for (int[] g : list) {
-
+        for (int[] g : list) {
+            for (int i : g) {
+                integerList.add(i);
             }
         }
-
-
-
-
         return integerList;
     }
 }
