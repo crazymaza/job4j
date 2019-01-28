@@ -1,6 +1,8 @@
 package tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Random;
  * {value} RANDOM - случайное число из диапазона, которое добавляется к id заявки.
  */
 public class Tracker {
-    private Item[] items = new Item[100];
+    private List<Item> items = new ArrayList<>();
     private int position;
     private final static Random RANDOM = new Random();
 
@@ -22,7 +24,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -46,8 +48,8 @@ public class Tracker {
         boolean result = false;
         item.setId(id);
         for (int index = 0; index != position; index++) {
-            if (items[index].getId().equals(id)) {
-                items[index] = item;
+            if (items.get(index).getId().equals(id)) {
+                items.add(index,item);
                 result = true;
                 break;
             }
@@ -63,9 +65,10 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index != items.length; index++) {
-            if (items[index].getId().equals(id)) {
-                System.arraycopy(this.items, index + 1, this.items, index, position--);
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
+                items.remove(item);
+                position--;
                 result = true;
                 break;
             }
