@@ -13,6 +13,6 @@ public class TrackerSingleEnumTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Item item = new Item("test1", "testDesc", 123L);
         tse.add(item);
-        assertThat(tse.getAll()[0], is(item));
+        assertThat(tse.getAll().get(0), is(item));
     }
 }

@@ -1,7 +1,6 @@
 package tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -47,12 +46,14 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         item.setId(id);
-        for (int index = 0; index != position; index++) {
-            if (items.get(index).getId().equals(id)) {
-                items.add(index,item);
+        int count = 0;
+        for (Item i : items) {
+            if (i.getId().equals(id)) {
+                items.set(count, item);
                 result = true;
                 break;
             }
+            count++;
         }
         return result;
     }
@@ -68,7 +69,6 @@ public class Tracker {
         for (Item item : items) {
             if (item.getId().equals(id)) {
                 items.remove(item);
-                position--;
                 result = true;
                 break;
             }
@@ -81,8 +81,8 @@ public class Tracker {
      *
      * @return - массив существующих заявок.
      */
-    public Item[] getAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> getAll() {
+        return items.subList(0, items.size());
     }
 
     /**
@@ -92,15 +92,14 @@ public class Tracker {
      * @return - массив найденых заявок.
      * {value} count - счетчик найденных элементов.
      */
-    public Item[] findByName(String name) {
-        int count = 0;
-        Item[] resultArray = new Item[position];
-        for (int index = 0; index != position; index++) {
-            if (items[index] != null && items[index].getName().equals(name)) {
-                resultArray[count++] = items[index];
+    public List<Item> findByName(String name) {
+        List<Item> nameList = new ArrayList<>();
+        for (Item item : items) {
+            if (item != null && item.getName().equals(name)) {
+                nameList.add(item);
             }
         }
-        return Arrays.copyOf(resultArray, count);
+        return nameList.subList(0, nameList.size());
     }
 
     /**
@@ -112,9 +111,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (int index = 0; index != position; index++) {
-            if (items[index].getId().equals(id)) {
-                result = items[index];
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
+                result = item;
                 break;
             }
         }

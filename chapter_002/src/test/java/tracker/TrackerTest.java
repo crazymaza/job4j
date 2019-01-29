@@ -2,6 +2,9 @@ package tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -11,7 +14,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDesc", 123L);
         tracker.add(item);
-        assertThat(tracker.getAll()[0], is(item));
+        assertThat(tracker.getAll().get(0), is(item));
     }
 
     @Test
@@ -21,7 +24,6 @@ public class TrackerTest {
         tracker.add(previous);
         Item next = new Item("test2", "descTwo", 1234L);
         tracker.replace(previous.getId(), next);
-
         assertThat(tracker.findById(previous.getId()), is(next));
     }
 
@@ -43,9 +45,9 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
         tracker.delete(deleted.getId());
-        Item[] expected = new Item[2];
-        expected[0] = itemTwo;
-        expected[1] = itemThree;
+        List<Item> expected = new ArrayList<>();
+        expected.add(itemTwo);
+        expected.add(itemThree);
         assertThat(tracker.getAll(), is(expected));
     }
 
@@ -60,9 +62,9 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemThree);
         tracker.add(itemOne1);
-        Item[] expected = new Item[2];
-        expected[0] = itemOne;
-        expected[1] = itemOne1;
+        List<Item> expected = new ArrayList<>();
+        expected.add(itemOne);
+        expected.add(itemOne1);
         assertThat(tracker.findByName(itemOne.getName()), is(expected));
     }
 
@@ -83,9 +85,9 @@ public class TrackerTest {
         tracker.add(item1);
         Item item2 = new Item("test2", "descTwo", 1234L);
         tracker.add(item2);
-        Item[] expected = new Item[2];
-        expected[0] = item1;
-        expected[1] = item2;
+        List<Item> expected = new ArrayList<>();
+        expected.add(item1);
+        expected.add(item2);
         assertThat(tracker.getAll(), is(expected));
     }
 

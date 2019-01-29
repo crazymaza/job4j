@@ -3,6 +3,8 @@ package tracker.singleton;
 import tracker.Item;
 import tracker.Tracker;
 
+import java.util.List;
+
 /**
  * Данный класс сделан в виде enum, т.е. экземпляр класса будет создаваться напрямую обращаясь к
  * переменной enum.
@@ -25,7 +27,7 @@ public enum TrackerSingleEnum {
     /**
      * @return возвращает все элементы массивы.
      */
-    public Item[] getAll() {
+    public List<Item> getAll() {
        return this.tracker.getAll();
     }
 }

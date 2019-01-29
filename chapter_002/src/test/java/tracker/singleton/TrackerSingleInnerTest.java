@@ -13,6 +13,6 @@ public class TrackerSingleInnerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Item item = new Item("test1", "testDesc", 123L);
         trackerSingletonComp.add(item);
-        assertThat(trackerSingletonComp.getAll()[0], is(item));
+        assertThat(trackerSingletonComp.getAll().get(0), is(item));
     }
 }

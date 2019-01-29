@@ -3,6 +3,8 @@ package tracker.singleton;
 import tracker.Item;
 import tracker.Tracker;
 
+import java.util.List;
+
 /**
  * В этом классе мы используем статический внутренний класс в котором создаем экземпляр родительского класса.
  * Получить этот экземпляр мы можем с помощью метода getInstance();
@@ -35,7 +37,7 @@ public class TrackerSingleInner {
     /**
      * @return возвращает все элементы массивы.
      */
-    public Item[] getAll() {
+    public List<Item> getAll() {
         return this.tracker.getAll();
     }
 }

@@ -3,6 +3,8 @@ package tracker.singleton;
 import tracker.Item;
 import tracker.Tracker;
 
+import java.util.List;
+
 /**
  * В данном классе используем композицию.
  * Создали переменную типа Tracker и работаем через нее.
@@ -46,7 +48,7 @@ public class TrackerSingletonComp {
     /**
      * @return возвращает все элементы массивы.
      */
-    public Item[] getAll() {
+    public List<Item> getAll() {
         return this.tracker.getAll();
     }
 }
