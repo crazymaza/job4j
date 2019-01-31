@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
@@ -27,12 +28,13 @@ public class TrackerTest {
         assertThat(tracker.findById(previous.getId()), is(next));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenEditingItemWhichIsNot() {
         Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDesc", 123L);
         Item next = new Item("test2", "descTwo", 1234L);
-        tracker.replace(previous.getId(), next);
+        final boolean replace = tracker.replace(previous.getId(), next);
+        assertFalse(replace);
     }
 
     @Test
