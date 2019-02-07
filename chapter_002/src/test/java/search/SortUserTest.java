@@ -39,15 +39,15 @@ public class SortUserTest {
         assertThat(result, is(10));
     }
     @Test
-    public void whenSortedUserByNameLengthAndAge() {
+    public void whenSortedUserByNameAndAge() {
         List<User> unsorted = new ArrayList<>();
         unsorted.add(new User("Иван", 12));
         unsorted.add(new User("Иван", 110));
-        unsorted.add(new User("Papaonkae", 1900));
-        unsorted.add(new User("Mama", 10));
+        unsorted.add(new User("Сергей", 1900));
+        unsorted.add(new User("Сергей", 10));
         SortUser user = new SortUser();
-        user.sort(user.sortNameLength(unsorted));
+        user.sort(user.sortByAllFields(unsorted));
         int result = unsorted.get(2).getAge();
-        assertThat(result, is(110));
+        assertThat(result, is(10));
     }
 }
