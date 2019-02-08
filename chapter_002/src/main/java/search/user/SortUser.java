@@ -41,15 +41,12 @@ public class SortUser {
      */
     public List<User> sortByAllFields(List<User> users) {
         users.sort(new Comparator<User>() {
-            int result = 0;
 
             @Override
             public int compare(User o1, User o2) {
-                for (int i = 0; i < o1.getName().length(); i++) {
-                    result = o1.getName().charAt(i) - o2.getName().charAt(i);
-                    if (result != 0) {
-                        break;
-                    }
+                int result = 0;
+                if (!(o1.getName().equals(o2.getName()))) {
+                    result = 1;
                 }
                 if (result == 0) {
                     result = o1.getAge() - o2.getAge();
