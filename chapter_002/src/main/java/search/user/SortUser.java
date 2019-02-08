@@ -44,10 +44,7 @@ public class SortUser {
 
             @Override
             public int compare(User o1, User o2) {
-                int result = 0;
-                if (!(o1.getName().equals(o2.getName()))) {
-                    result = 1;
-                }
+                int result = o1.getName().compareTo(o2.getName());
                 if (result == 0) {
                     result = o1.getAge() - o2.getAge();
                 }

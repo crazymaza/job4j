@@ -38,6 +38,7 @@ public class SortUserTest {
         int result = unsorted.get(0).getAge();
         assertThat(result, is(10));
     }
+
     @Test
     public void whenSortedUserByNameAndAge() {
         List<User> unsorted = new ArrayList<>();
@@ -49,5 +50,20 @@ public class SortUserTest {
         user.sort(user.sortByAllFields(unsorted));
         int result = unsorted.get(2).getAge();
         assertThat(result, is(10));
+    }
+
+    @Test
+    public void whenSortedUserByNam() {
+        List<User> unsorted = new ArrayList<>();
+        unsorted.add(new User("Иван", 12));
+        unsorted.add(new User("Иван", 110));
+        unsorted.add(new User("Сергей", 1900));
+        unsorted.add(new User("Сергей", 10));
+        unsorted.add(new User("Боля", 100));
+        unsorted.add(new User("Аоля", 1));
+        SortUser user = new SortUser();
+        user.sort(user.sortByAllFields(unsorted));
+        int result = unsorted.get(2).getAge();
+        assertThat(result, is(12));
     }
 }
