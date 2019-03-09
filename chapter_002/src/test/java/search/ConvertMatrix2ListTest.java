@@ -1,7 +1,7 @@
 package search;
 
 import org.junit.Test;
-import search.arrayList.ConvertMatrix2List;
+import search.arraylist.ConvertMatrix2List;
 
 import java.util.Arrays;
 import java.util.List;

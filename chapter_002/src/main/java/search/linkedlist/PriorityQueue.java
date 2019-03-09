@@ -1,4 +1,4 @@
-package search.linkedList;
+package search.linkedlist;
 
 import java.util.LinkedList;
 

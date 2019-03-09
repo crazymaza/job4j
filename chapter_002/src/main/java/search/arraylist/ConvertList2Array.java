@@ -1,4 +1,4 @@
-package search.arrayList;
+package search.arraylist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,13 @@ public class ConvertList2Array {
             cells = list.size() / rows;
         }
         int[][] array = new int[rows][cells];
-        int indexOfList = 0;
         for (int[] i : array) {
             int count = 0;
-            for (int t : i) {
-                if (indexOfList < list.size()) {
-                    i[count++] = list.get(indexOfList++);
+            for (int t : list) {
+                if (count != cells) {
+                    i[count++] = t;
+                } else {
+                    break;
                 }
             }
         }

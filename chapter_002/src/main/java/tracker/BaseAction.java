@@ -1,6 +1,6 @@
 package tracker;
 
-abstract class BaseAction implements UserAction{
+abstract class BaseAction implements UserAction {
     private final int numberOfMenu;
     private final String name;
 

@@ -12,7 +12,7 @@ public class StubInput implements Input {
      * desc - описание заявки
      * 0 - выйти из трекера.
      */
-    private final String[] VALUE;
+    private final String[] value;
 
     /**
      * Поле считает количество вызовом метода ask.
@@ -21,7 +21,7 @@ public class StubInput implements Input {
     private int position;
 
     public StubInput(String[] value) {
-        this.VALUE = value;
+        this.value = value;
     }
 
     /**
@@ -33,12 +33,12 @@ public class StubInput implements Input {
      * при следующем вызове он вернет нам новое значение.
      */
     public String ask(String question) {
-        return this.VALUE[this.position++];
+        return this.value[this.position++];
     }
 
     @Override
     public int ask(String question, List<Integer> range) {
-        int key =  Integer.valueOf(this.VALUE[this.position++]);
+        int key = Integer.valueOf(this.value[this.position++]);
         boolean exist = false;
         for (int value : range) {
             if (value == key) {

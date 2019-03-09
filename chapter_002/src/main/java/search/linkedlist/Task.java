@@ -1,4 +1,4 @@
-package search.linkedList;
+package search.linkedlist;
 
 public class Task {
     private String desc;

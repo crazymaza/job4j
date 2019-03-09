@@ -1,6 +1,6 @@
 package tracker;
 
-public class ValidateMenuItems implements UserAction{
+public class ValidateMenuItems implements UserAction {
     private UserAction userAction;
 
 

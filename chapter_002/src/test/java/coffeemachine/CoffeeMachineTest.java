@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeemachine;
 
 import org.junit.Test;
 
@@ -49,11 +49,7 @@ public class CoffeeMachineTest {
         System.setOut(new PrintStream(this.out));
         coffee.changes(10, 17);
         assertThat(new String(out.toByteArray()),
-                is(
-                        new StringBuilder()
-                                .append(sb)
-                                .toString()
-                )
+                is(String.valueOf(sb))
         );
         System.setOut(this.stdout);
     }

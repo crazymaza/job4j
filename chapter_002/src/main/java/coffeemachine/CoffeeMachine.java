@@ -1,4 +1,4 @@
-package coffeeMachine;
+package coffeemachine;
 
 /**
  * + Делаем массив из 10,5,2,1.

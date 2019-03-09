@@ -1,8 +1,8 @@
 package search;
 
 import org.junit.Test;
-import search.arrayList.Person;
-import search.arrayList.PhoneDictionary;
+import search.arraylist.Person;
+import search.arraylist.PhoneDictionary;
 
 import java.util.List;
 
