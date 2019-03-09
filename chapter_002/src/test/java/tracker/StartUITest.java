@@ -15,7 +15,6 @@ public class StartUITest {
     private ByteArrayOutputStream out = new ByteArrayOutputStream();
     private String ln = System.lineSeparator();
     private StringBuilder sb = new StringBuilder()
-            .append("Меню:").append(ln)
             .append("0. Выход").append(ln)
             .append("1. Добавление заявки").append(ln)
             .append("2. Редактирование заявки").append(ln)
@@ -101,7 +100,7 @@ public class StartUITest {
                                 .append("-------------").append(ln)
                                 .append(ln)
                                 .append(sb)
-                                .append("Как жаль, что Вы нас покидаете.").append(ln)
+                                .append("Как жаль, что Вы уже уходите.").append(ln)
                                 .toString()
                 )
         );
@@ -125,7 +124,7 @@ public class StartUITest {
                                 .append("-------------").append(ln)
                                 .append(ln)
                                 .append(sb)
-                                .append("Как жаль, что Вы нас покидаете.").append(ln)
+                                .append("Как жаль, что Вы уже уходите.").append(ln)
                                 .toString()
                 )
 
@@ -152,7 +151,7 @@ public class StartUITest {
                                 .append("-------------").append(ln)
                                 .append(ln)
                                 .append(sb)
-                                .append("Как жаль, что Вы нас покидаете.").append(ln)
+                                .append("Как жаль, что Вы уже уходите.").append(ln)
                                 .toString()
                 )
         );
