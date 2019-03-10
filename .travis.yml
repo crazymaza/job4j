@@ -12,9 +12,10 @@ after_success:
 notifications:
   email:
     recipients:
-      -dx2389@gmail.com
+      - dx2389@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
 env:
   global:
     - CODECOV_TOKEN="a90060cc-22e6-4684-9624-63279badffe4"
+jdk: - openjdk8
