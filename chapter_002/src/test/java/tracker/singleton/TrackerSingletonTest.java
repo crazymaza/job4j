@@ -4,13 +4,14 @@ import org.junit.Test;
 import tracker.Item;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 public class TrackerSingletonTest {
-    private TrackerSingleton trackerSingleton = TrackerSingleton.getInstance();
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item item = new Item("test1", "testDesc", 123L);
         trackerSingleton.add(item);
         assertThat(trackerSingleton.getAll()[0], is(item));
@@ -18,23 +19,25 @@ public class TrackerSingletonTest {
 
     @Test
     public void whenReplaceNameThenReturnNewName() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item previous = new Item("test1", "testDesc", 123L);
         trackerSingleton.add(previous);
         Item next = new Item("test2", "descTwo", 1234L);
         trackerSingleton.replace(previous.getId(), next);
-
         assertThat(trackerSingleton.findById(previous.getId()), is(next));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenEditingItemWhichIsNot() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item previous = new Item("test1", "testDesc", 123L);
         Item next = new Item("test2", "descTwo", 1234L);
-        trackerSingleton.replace(previous.getId(), next);
+        assertFalse(trackerSingleton.replace(previous.getId(), next));
     }
 
     @Test
     public void whenDeleteItem() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item deleted = new Item("test1", "testDesc", 123L);
         Item itemTwo = new Item("test2", "testDesc2", 1234L);
         Item itemThree = new Item("test4", "testDesc3", 12345L);
@@ -50,6 +53,7 @@ public class TrackerSingletonTest {
 
     @Test
     public void whenFindItemByName() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item itemOne = new Item("test5", "testDesc", 123L);
         Item itemOne1 = new Item("test5", "testDesc", 123L);
         Item itemTwo = new Item("test2", "testDesc2", 1234L);
@@ -66,6 +70,7 @@ public class TrackerSingletonTest {
 
     @Test
     public void whenYouFindAnItemById() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item wanted = new Item("test1", "testDesc", 123L);
         trackerSingleton.add(wanted);
         Item item = new Item("test2", "descTwo", 1234L);
@@ -75,6 +80,7 @@ public class TrackerSingletonTest {
 
     @Test
     public void whenYouGetAllItems() {
+        TrackerSingleton trackerSingleton = new TrackerSingleton();
         Item item1 = new Item("test1", "testDesc", 123L);
         trackerSingleton.add(item1);
         Item item2 = new Item("test2", "descTwo", 1234L);

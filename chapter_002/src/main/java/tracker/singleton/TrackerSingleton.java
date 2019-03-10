@@ -18,7 +18,13 @@ public class TrackerSingleton {
         return ourInstance;
     }
 
-    private TrackerSingleton() {
+    /**
+     * В основной версии программы будет использоваться метод getInstance
+     * Пустой конструктор сделан специально для тестов.
+     * По умолчанию пустой конструктор в singleton'e приватный.
+     */
+
+    public TrackerSingleton() {
     }
 
     /**
