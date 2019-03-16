@@ -1,4 +1,4 @@
-package ru.job4j.bankTransfers;
+package ru.job4j.banktransfers;
 
 import java.util.*;
 

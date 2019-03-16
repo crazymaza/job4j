@@ -1,10 +1,10 @@
-package ru.job4j.bankTransfer;
+package ru.job4j.banktransfer;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.bankTransfers.Account;
-import ru.job4j.bankTransfers.Bank;
-import ru.job4j.bankTransfers.User;
+import ru.job4j.banktransfers.Account;
+import ru.job4j.banktransfers.Bank;
+import ru.job4j.banktransfers.User;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -54,8 +54,7 @@ public class BankTest {
         boolean transfer = bank.transferMoney(firstUser.getPassport(), bank.getUserAccounts("1234")
                         .get(0).getRequisites(),
                 secondUser.getPassport(), bank.getUserAccounts("12345")
-                        .get(0).getRequisites()
-                , 50);
+                        .get(0).getRequisites(), 50);
         double firstAmountOfMoney = bank.getUserAccounts("1234").get(0).getValue();
         double secondAmountOfMoney = bank.getUserAccounts("12345").get(0).getValue();
         assertThat(firstAmountOfMoney, is(184.56));
