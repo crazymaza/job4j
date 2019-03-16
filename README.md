@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/crazymaza/job4j.svg?branch=master)](https://travis-ci.org/crazymaza/job4j)
+[![codecov](https://codecov.io/gh/crazymaza/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/crazymaza/job4j)
 # [job4j](http://job4j.ru) Репозиторий уровня "Стажер".
 Я прохожу обучение по курсу Job4j и планирую завершить его к концу 2018 года. 
 Ниже находятся темы и проекты, которые проходятся в данном курсе.
