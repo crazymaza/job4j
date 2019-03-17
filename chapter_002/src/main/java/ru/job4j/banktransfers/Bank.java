@@ -49,7 +49,6 @@ public class Bank {
             if (user.getKey().getPassport().equals(passport)) {
                 account.setRequisites(generatedId());
                 user.getValue().add(index++, account);
-                banks.put(user.getKey(), user.getValue());
             }
         }
     }
@@ -86,36 +85,58 @@ public class Bank {
 
     /**
      * Перевод с счета на счет.
+     * Если счёт отправки будет найден и на нём будет сумма,
+     * превышающая или равная сумме перевода, то тогда с этого
+     * счёта данная сумма будет снята, а на счёт зачисления добавлена.
      *
-     * @param srcPassport  - паспорт пользователя.
-     * @param srcRequisite - счёт с которого переводят.
-     * @param destPassport - паспорт пользователя которому переводят.
-     * @param dstRequisite - счет на который переводят.
-     * @param amount       - сумма перевода.
+     * @param srcPassport   - паспорт пользователя.
+     * @param srcRequisite  - счёт с которого переводят.
+     * @param destPassport  - паспорт пользователя которому переводят.
+     * @param destRequisite - счет на который переводят.
+     * @param amount        - сумма перевода.
      * @return - если счет не найден или недостаточно средств, то вернётся false.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
-                                 String destPassport, String dstRequisite, double amount) {
+                                 String destPassport, String destRequisite, double amount) {
         boolean find = false;
-        for (Map.Entry<User, List<Account>> user : banks.entrySet()) {
-            if (user.getKey().getPassport().equals(srcPassport)) {
-                for (Account account : user.getValue()) {
-                    if (amount <= account.getValue() && srcRequisite.equals(account.getRequisites())) {
-                        account.setValue(account.getValue() - amount);
-                        find = true;
+        if (accountSearch(srcPassport, srcRequisite) && accountSearch(destPassport, destRequisite)) {
+            for (Account srcAccount : getUserAccounts(srcPassport)) {
+                if (srcAccount.getRequisites().equals(srcRequisite)
+                        && srcAccount.getValue() >= amount) {
+                    srcAccount.setValue(srcAccount.getValue() - amount);
+                    for (Account destAccount : getUserAccounts(destPassport)) {
+                        if (destAccount.getRequisites().equals(destRequisite)) {
+                            destAccount.setValue(destAccount.getValue() + amount);
+                            find = true;
+                        }
                     }
                 }
             }
-            if (user.getKey().getPassport().equals(destPassport)) {
-                for (Account destAccount : user.getValue()) {
-                    if (destAccount.getRequisites().equals(dstRequisite)) {
-                        destAccount.setValue(destAccount.getValue() + amount);
-                    }
 
+        }
+        return find;
+    }
+
+    /**
+     * Если нужный счёт существует, то вернётся true.
+     *
+     * @param passport  - паспорт пользователя.
+     * @param requisite - реквизиты счёта.
+     * @return - существует счёт или нет (true / false)
+     */
+    private boolean accountSearch(String passport, String requisite) {
+        boolean accountFound = false;
+        for (Map.Entry<User, List<Account>> user : banks.entrySet()) {
+            if (user.getKey().getPassport().equals(passport)) {
+                for (Account account : user.getValue()) {
+                    if (requisite.equals(account.getRequisites())) {
+                        accountFound = true;
+                        break;
+                    }
                 }
             }
         }
-        return find;
+        return accountFound;
     }
 }
 
