@@ -98,23 +98,13 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
-        boolean find = false;
-        if (accountSearch(srcPassport, srcRequisite) && accountSearch(destPassport, destRequisite)) {
-            for (Account srcAccount : getUserAccounts(srcPassport)) {
-                if (srcAccount.getRequisites().equals(srcRequisite)
-                        && srcAccount.getValue() >= amount) {
-                    srcAccount.setValue(srcAccount.getValue() - amount);
-                    for (Account destAccount : getUserAccounts(destPassport)) {
-                        if (destAccount.getRequisites().equals(destRequisite)) {
-                            destAccount.setValue(destAccount.getValue() + amount);
-                            find = true;
-                        }
-                    }
-                }
-            }
-
+        boolean transfer = false;
+        final Account accountSrc = accountSearch(srcPassport, srcRequisite);
+        final Account accountDest = accountSearch(destPassport, destRequisite);
+        if (accountSrc != null && accountDest != null) {
+            transfer = accountSrc.transfer(accountDest, amount);
         }
-        return find;
+        return transfer;
     }
 
     /**
@@ -124,19 +114,19 @@ public class Bank {
      * @param requisite - реквизиты счёта.
      * @return - существует счёт или нет (true / false)
      */
-    private boolean accountSearch(String passport, String requisite) {
-        boolean accountFound = false;
+    private Account accountSearch(String passport, String requisite) {
+        Account acc = null;
         for (Map.Entry<User, List<Account>> user : banks.entrySet()) {
             if (user.getKey().getPassport().equals(passport)) {
                 for (Account account : user.getValue()) {
                     if (requisite.equals(account.getRequisites())) {
-                        accountFound = true;
+                        acc = account;
                         break;
                     }
                 }
             }
         }
-        return accountFound;
+        return acc;
     }
 }
 

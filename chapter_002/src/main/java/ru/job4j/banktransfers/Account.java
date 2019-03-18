@@ -23,4 +23,21 @@ public class Account {
     public void setRequisites(String requisites) {
         this.requisites = requisites;
     }
+
+    /**
+     * Перевод между счетами.
+     *
+     * @param accountDest - счет на который переводят.
+     * @param amount      - сумма перевода.
+     * @return - удалось перевести или нет.
+     */
+    public boolean transfer(Account accountDest, double amount) {
+        boolean tr = false;
+        if (value >= amount) {
+            value -= amount;
+            accountDest.value += amount;
+            tr = true;
+        }
+        return tr;
+    }
 }
