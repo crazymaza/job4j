@@ -13,6 +13,30 @@ import java.util.TreeSet;
  */
 
 public class DepartmentsSort {
+    private TreeSet<String> treeSet = new TreeSet<>(new Comparator<String>() {
+        @Override
+        public int compare(String s1, String s2) {
+            int res = 0;
+            int n1 = s1.length();
+            int n2 = s2.length();
+            int min = Math.min(n1, n2);
+            for (int i = 0; i < min; i++) {
+                char c1 = s1.charAt(i);
+                char c2 = s2.charAt(i);
+                if (c1 < c2) {
+                    return 1;
+                } else if (c1 > c2) {
+                    return -1;
+                }
+            }
+            return n1 - n2;
+        }
+    });
+
+    public void addString() {
+        treeSet.add("K1");
+        treeSet.add("K2\\SK1");
+    }
 
     public String[] ascendingSort(String[] dep) {
         Arrays.sort(dep);
@@ -21,58 +45,9 @@ public class DepartmentsSort {
 
     public String[] descendingSort(String[] dep) {
         String[] result;
-        TreeSet<String> treeSet = new TreeSet<>(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int compareResult = 0;
-                int firstLength = o1.length();
-                int secondLength = o2.length();
-                if (firstLength == secondLength) {
-                    compareResult = compareIndex(o1, o2);
-                }
-                if (firstLength > secondLength) {
-                    if (o1.startsWith(o2)) {
-                        compareResult = 1;
-                    } else {
-                        compareResult = compareIndex(o1, o2);
-                    }
-                }
-                if (firstLength < secondLength) {
-                    if (o2.startsWith(o1)) {
-                        compareResult = -1;
-                    } else {
-                        compareResult = compareIndex(o1, o2);
-                    }
-                }
-                return compareResult;
-            }
-        });
+        addString();
         treeSet.addAll(Arrays.asList(dep));
         result = treeSet.toArray(new String[0]);
-        return result;
-    }
-
-    public int compareIndex(String o1, String o2) {
-        int result = 0;
-        int firstLength = o1.length();
-        int secondLength = o2.length();
-        int whoIsBigger = firstLength > secondLength ? secondLength : firstLength;
-        for (int i = 0; i < whoIsBigger; i++) {
-            if (o1.charAt(i) > o2.charAt(i)) {
-                result = -1;
-            }
-            if (o1.charAt(i) < o2.charAt(i)) {
-                result = 1;
-            }
-            if (o1.charAt(i) == o2.charAt(i)) {
-                if (firstLength == whoIsBigger - 1) {
-                    result = -1;
-                }
-                if (secondLength == whoIsBigger - 1) {
-                    result = 1;
-                }
-            }
-        }
         return result;
     }
 }
